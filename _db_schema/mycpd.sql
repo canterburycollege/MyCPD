@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.5.6
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2013 at 07:43 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Generation Time: Feb 08, 2013 at 12:11 PM
+-- Server version: 5.1.66-community
+-- PHP Version: 5.3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,14 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `Employee`
 --
 
-DROP TABLE IF EXISTS `Employee`;
 CREATE TABLE IF NOT EXISTS `Employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
   `moodle_user_id` int(11) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -41,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `Employee` (
 -- Table structure for table `Learning_plan`
 --
 
-DROP TABLE IF EXISTS `Learning_plan`;
 CREATE TABLE IF NOT EXISTS `Learning_plan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `Learning_plan` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `learning_plan_unq` (`employee_id`,`academic_year`),
   KEY `employee_id` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -57,7 +55,6 @@ CREATE TABLE IF NOT EXISTS `Learning_plan` (
 -- Table structure for table `Learning_plan_detail`
 --
 
-DROP TABLE IF EXISTS `Learning_plan_detail`;
 CREATE TABLE IF NOT EXISTS `Learning_plan_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `learning_plan_id` int(11) NOT NULL,
@@ -72,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `Learning_plan_detail` (
   KEY `learning_plan_id` (`learning_plan_id`),
   KEY `learning_plan_target_id` (`learning_plan_target_id`),
   KEY `priority_type_id` (`priority_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -80,14 +77,13 @@ CREATE TABLE IF NOT EXISTS `Learning_plan_detail` (
 -- Table structure for table `Learning_plan_target`
 --
 
-DROP TABLE IF EXISTS `Learning_plan_target`;
 CREATE TABLE IF NOT EXISTS `Learning_plan_target` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `learning_plan_id` int(11) NOT NULL,
   `description` varchar(250) NOT NULL,
   `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -95,20 +91,48 @@ CREATE TABLE IF NOT EXISTS `Learning_plan_target` (
 -- Table structure for table `Priority_type`
 --
 
-DROP TABLE IF EXISTS `Priority_type`;
 CREATE TABLE IF NOT EXISTS `Priority_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
   `sort_order` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `targets`
+--
+
+CREATE TABLE IF NOT EXISTS `targets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) DEFAULT NULL,
+  `description` varchar(600) DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
+  `user_id` int(20) DEFAULT NULL,
+  `target_date` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `targets_ibfk_2` (`status_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `target_status`
+--
+
+CREATE TABLE IF NOT EXISTS `target_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_learning_plan_detail`
 --
-DROP VIEW IF EXISTS `v_learning_plan_detail`;
 CREATE TABLE IF NOT EXISTS `v_learning_plan_detail` (
 `learning_plan_id` int(11)
 ,`learning_plan_detail_id` int(11)
@@ -148,6 +172,12 @@ ALTER TABLE `Learning_plan_detail`
   ADD CONSTRAINT `Learning_plan_detail_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `Learning_plan` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`learning_plan_target_id`) REFERENCES `Learning_plan_target` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `Priority_type` (`id`);
+
+--
+-- Constraints for table `targets`
+--
+ALTER TABLE `targets`
+  ADD CONSTRAINT `targets_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `target_status` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
