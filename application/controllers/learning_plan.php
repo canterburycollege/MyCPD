@@ -117,6 +117,18 @@ class Learning_plan extends CI_Controller {
             }
         }
     }
+    
+    /**
+     * Loads page to create a new target for a given learning plan
+     * 
+     * @param integer $learning_plan_id 
+     */
+    public function create_target($learning_plan_id){
+        /**
+         * @todo code to create new target
+         */
+        $this->load->view('learning_plan/create_target');
+    }
 
     /**
      * Loads page to delete a given learning plan detail row
