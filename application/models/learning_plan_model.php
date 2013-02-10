@@ -43,8 +43,8 @@ class Learning_plan_model extends CI_Model {
      * 
      * @param array $data Array of key=>value pairs containing data to be added
      */
-    public function create_learning_plan($data){
-        
+    public function create_header($data){
+        $this->db->insert($this->tbl_learning_plan, $data);
     }
     
     /**
@@ -52,7 +52,7 @@ class Learning_plan_model extends CI_Model {
      * 
      * @param array $data Array of key=>value pairs containing data to be added
      */
-    public function create_learning_plan_detail($data){
+    public function create_detail($data){
         $this->db->insert($this->tbl_learning_plan_detail, $data); 
     }
     
@@ -73,7 +73,7 @@ class Learning_plan_model extends CI_Model {
      * 
      * @param integer $id Learning plan detail row id
      */
-    public function delete_learning_plan_detail($id){
+    public function delete_detail($id){
         
     }
     
@@ -83,7 +83,7 @@ class Learning_plan_model extends CI_Model {
      * @param integer $employee_id Employee row id
      * @return array Array of learning plan id/year
      */
-    public function get_learning_plans($employee_id){
+    public function get_header_list($employee_id){
         
         $data = array();
         $this->db
@@ -92,10 +92,10 @@ class Learning_plan_model extends CI_Model {
             ->order_by('academic_year', 'desc');
         $query = $this->db->get($this->tbl_learning_plan);
         foreach ($query->result() as $row){
-            $rows[] = $row;
+            $data[] = $row;
         }
         
-        return $rows;
+        return $data;
     }
     
     /**
@@ -104,7 +104,7 @@ class Learning_plan_model extends CI_Model {
      * @param integer $employee_id Employee row id
      * @return integer Learning plan header row id
      */
-    public function get_latest_learning_plan($employee_id){
+    public function get_latest_header_id($employee_id){
 
         $this->db
             ->select('id','academic_year')
@@ -131,7 +131,7 @@ class Learning_plan_model extends CI_Model {
                 array('id' => $id));
         
         $object->header =  $query->row();
-        $object->details = $this->get_learning_plan_detail($id);
+        $object->details = $this->get_detail($id);
         
         return $object;
     }
@@ -142,7 +142,7 @@ class Learning_plan_model extends CI_Model {
      * @param integer $learning_plan_id Learning plan header row id
      * @return array Array of Learning Plan detail rows (objects)
      */
-    protected function get_learning_plan_detail($learning_plan_id){
+    protected function get_detail($learning_plan_id){
         
         $rows = array();
         $query = $this->db->get_where($this->v_learning_plan_detail, 
@@ -161,7 +161,7 @@ class Learning_plan_model extends CI_Model {
      * @param integer $learning_plan_id
      * @param array $data Array of key=>value pairs containing data to be edited
      */
-    public function update_learning_plan($learning_plan_id,$data){
+    public function update_header($learning_plan_id,$data){
         
     }
     
@@ -171,7 +171,7 @@ class Learning_plan_model extends CI_Model {
      * @param integer $learning_plan_detail_id
      * @param array $data Array of key=>value pairs containing data to be edited
      */
-    public function update_learning_plan_detail($learning_plan_detail_id,$data){
+    public function update_detail($learning_plan_detail_id,$data){
         
     }
     

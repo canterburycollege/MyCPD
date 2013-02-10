@@ -18,6 +18,9 @@
         <h1>My Learning Plan</h1>
         <h2>Employee: <?= $employee->display_name ?></h2>
         <h3>Academic Year: <?= $learning_plan->header->academic_year ?></h3>
+        <h3>Targets</h3>
+        <div>Targets go here</div>
+        <h3>Activities/Events</h3>
         <table id="table_1">
             <thead>
                 <tr>
