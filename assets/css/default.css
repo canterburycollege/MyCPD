@@ -38,8 +38,8 @@ form {  /* set width in form, not fieldset (still takes up more room w/ fieldset
     margin: 0;
     padding: 0;
     min-width: 500px;
-    max-width: 600px;
-    width: 560px; 
+    max-width: 1200px;
+    width: 1200px; 
 }
 
 form fieldset {

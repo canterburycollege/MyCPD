@@ -7,6 +7,13 @@ class Target_model extends CI_Model {
      * @var string Target status table name
      */
     protected $tbl_target_status = 'target_status';
+    
+        /**
+     *
+     * @var string Targets table name
+     */
+    protected $tbl_targets = 'targets';
+
 
         protected $employee_id;
     
@@ -22,6 +29,7 @@ class Target_model extends CI_Model {
         return $query->result_array();
     }
 
+    
     public function set_target() {
         $this->load->helper('url');
 
@@ -56,4 +64,7 @@ class Target_model extends CI_Model {
         return $rows;
     }
 
+   public function delete_target($id) {
+       $this->db->delete('targets', array('id' => $id)); 
+   }
 }

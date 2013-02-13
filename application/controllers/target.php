@@ -29,7 +29,8 @@ class Target extends CI_Controller {
 
     public function view() {
         $err_msg = $this->controller . '/view()';
-
+$this->load->helper('form');
+	$this->load->library('form_validation');
         $data['targets'] = $this->target_model->get_targets();
         $this->load->view('target/view', $data);
     }
@@ -56,4 +57,12 @@ class Target extends CI_Controller {
 	}
 }
     
+ public function delete()
+{
+     
+$this->load->view('target/delete');
+$this->target_model->delete_target($_GET['id']);
 }
+    
+}
+ 
