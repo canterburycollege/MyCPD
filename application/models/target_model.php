@@ -12,7 +12,7 @@ class Target_model extends CI_Model {
      *
      * @var string Targets table name
      */
-    protected $tbl_targets = 'targets';
+    protected $tbl_targets = 'target';
 
 
         protected $employee_id;
