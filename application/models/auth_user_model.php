@@ -45,9 +45,9 @@ class Auth_user_model extends CI_Model {
         }
         // echo msg if test row inserted (should really return msg!)
         if($affected_rows > 0){
-            echo "<p>Test msg : {$affected_rows} test row inserted into employee table</p>";
+            //echo "<p>Test msg : {$affected_rows} test row inserted into employee table</p>";
         } else {
-            echo '<p>Test msg : test employee already exists in employee table</p>';
+            //echo '<p>Test msg : test employee already exists in employee table</p>';
         }
     }
     
