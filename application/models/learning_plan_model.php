@@ -11,22 +11,22 @@ class Learning_plan_model extends CI_Model {
      *
      * @var string Learning plan header table name
      */
-    protected $tbl_learning_plan = 'Learning_plan';
+    protected $tbl_learning_plan = 'learning_plan';
     /**
      *
      * @var string Learning plan detail table name
      */
-    protected $tbl_learning_plan_detail = 'Learning_plan_detail';
+    protected $tbl_learning_plan_detail = 'learning_plan_detail';
     /**
      *
      * @var string Learning pla targets table name
      */
-    protected $tbl_learning_plan_target = 'Learning_plan_target';
+    protected $tbl_learning_plan_target = 'learning_plan_target';
     /**
      *
      * @var string Priorities table name
      */
-    protected $tbl_priority_type = 'Priority_type';
+    protected $tbl_priority_type = 'priority_type';
     /**
      *
      * @var string Learning plan view name - joins all related tables

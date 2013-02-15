@@ -6,7 +6,7 @@
  */
 class Employee_model extends CI_Model {
     
-    protected $tbl_employee = 'Employee';
+    protected $tbl_employee = 'employee';
 
     public function __construct() {
         $this->load->database();
