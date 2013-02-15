@@ -10,10 +10,6 @@
                 $('#table_detail').dataTable({
                     "bJQueryUI": true,
                     "sPaginationType": "full_numbers"});
-            
-                $('#table_target').dataTable({
-                    "bJQueryUI": true,
-                    "sPaginationType": "full_numbers"});
             });
         </script>
 
@@ -22,27 +18,12 @@
         <h1>My Learning Plan</h1>
         <h2>Employee: <?= $employee->display_name ?></h2>
         <h3>Academic Year: <?= $learning_plan->header->academic_year ?></h3>
-        <h3>Targets</h3>
+
         <div id="div_targets">
-            <table id="table_target">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Sort order</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p><?/*= anchor('learning_plan/create_target/'. $learning_plan->header->id, 'Add new Target')*/?>
+            <p>
+                <?= anchor('/target/view', 'Go to Targets Page') ?>
+                -- Maybe the targets page could load into an accordion, here?
             </p>
-            <li><?= anchor('/target/view','Targets') ?></a></li>
         </div>
         <div id="div_activities">
             <h3>Activities/Events</h3>
