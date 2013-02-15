@@ -40,11 +40,9 @@
                     </tr>
                 </tbody>
             </table>
-            <p><?=
-anchor('learning_plan/create_target/'
-        . $learning_plan->header->id, 'Add new Target')
-?>
+            <p><?/*= anchor('learning_plan/create_target/'. $learning_plan->header->id, 'Add new Target')*/?>
             </p>
+            <li><?= anchor('/target/view','Targets') ?></a></li>
         </div>
         <div id="div_activities">
             <h3>Activities/Events</h3>
