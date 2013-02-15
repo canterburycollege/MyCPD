@@ -24,9 +24,14 @@ class Target_model extends CI_Model {
         $this->employee_id = $this->auth_user_model->get_auth_user()->employee_id;
     }
 
-    public function get_targets() {
+    public function get_targets($id = FALSE) {
+        if ($id===FALSE) {
         $query = $this->db->get('v_targets_with_status');
+        return $query->result_array();} else {
+            $query = $this->db->get_where('v_targets_with_status', array('id' => $id));
         return $query->result_array();
+        }
+        
     }
 
     
