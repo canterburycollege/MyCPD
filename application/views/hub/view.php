@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html>
     <head>
         <title>MyCPD Hub</title>
@@ -19,18 +20,3 @@
     <li><a href="<?= base_url('/target/view">Targets') ?>"</a></li>
     </body>
 </html>
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
