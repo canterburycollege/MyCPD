@@ -17,6 +17,6 @@
     <body>
         <h1>MyCPD Hub</h1>
     <li><a href="<?= base_url('/learning_plan/view') ?>">Learning Plan</a></li>
-    <li><a href="<?= base_url('/target/view">Targets') ?>"></a></li>
+    <li><a href="<?= base_url('/target/view') ?>">Targets</a></li>
     </body>
 </html>
