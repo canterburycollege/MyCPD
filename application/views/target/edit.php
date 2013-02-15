@@ -1,3 +1,16 @@
+<?php 
+/**
+ * @package target edit form
+ * @todo Check this is your target to edit or your an admin.
+ * @todo set current status.
+ */
+
+//for testing
+echo "Edit record ".$_GET['id']."<br>"; ?>
+
+
+
+
         <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
@@ -9,22 +22,28 @@
         </script>
 
 <h2>Edit a target</h2>
+                <?php foreach ($targets as $target_item): ?>
+              <?php echo "Status: ".$target_item['status']; ?>
+                     
+               
+<?php endforeach; ?>
 
-<?php echo validation_errors(); ?>
+                    
+                    <?php echo validation_errors(); ?>
 
-<?php echo form_open('target/edit') ?>
+<?php echo form_open('target/create') ?>
 
 <label for="title">Title</label> 
-<input type="input" name="title" /><br />
+<input type="input" name="title" value="<?= $target_item['title'] ?>"/><br />
 
 <label for="description">Description</label>
-<textarea name="description"></textarea><br />
+<textarea name="description"><?= $target_item['description'] ?></textarea><br />
 
 <label for="target_status_id">Status</label>
-<?= form_dropdown('target_status', $target_status) ?><br />
+<?= form_dropdown('target_status', $target_status)?><br />
 
             <label for="target_date">Target Date</label>
-            <input type="text" name="target_date" id="target_date" /><br />
+            <input type="text" name="target_date" id="target_date" value="<?= $target_item['target_date'] ?>"/><br />
 
 <input type="submit" name="submit" value="Create target" /> 
 

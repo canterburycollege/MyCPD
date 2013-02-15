@@ -26,7 +26,7 @@ function Deleteqry(id)
 function Editqry(id)
 {
   
-           window.location="edit.php?id="+id;
+           window.location="edit?id="+id;
     
 }
         </script>
