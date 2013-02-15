@@ -15,8 +15,8 @@
     </head>
     <body>
         <h1>MyCPD Hub</h1>
-    <li><a href="/learning_plan/view">Learning Plan</a></li>
-    <li><a href="/target/view">Targets</a></li>
+    <li><a href="/MyCPD/learning_plan/view">Learning Plan</a></li>
+    <li><a href="/MyCPD/target/view">Targets</a></li>
     </body>
 </html>
 
