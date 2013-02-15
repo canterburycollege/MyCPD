@@ -7,9 +7,13 @@
         <script type="text/javascript" src="<?= base_url('assets/js/DataTables/media/js/jquery.dataTables.js') ?>"></script>
         <script>
             $(document).ready(function(){
-                $('#table_1').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers"});
+                $('#table_detail').dataTable({
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers"});
+            
+                $('#table_target').dataTable({
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers"});
             });
         </script>
 
@@ -18,7 +22,30 @@
         <h1>My Learning Plan</h1>
         <h2>Employee: <?= $employee->display_name ?></h2>
         <h3>Academic Year: <?= $learning_plan->header->academic_year ?></h3>
-        <table id="table_1">
+        <h3>Targets</h3>
+        <table id="table_target">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Sort order</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><?=
+                anchor('learning_plan/create_target/'
+                        . $learning_plan->header->id, 'Add new Target')
+                ?>
+        </p>
+        <h3>Activities/Events</h3>
+        <table id="table_detail">
             <thead>
                 <tr>
                     <th>Title of CPD activity/event</th>
@@ -44,20 +71,20 @@
                         <td><?=
                 anchor('learning_plan/update_detail/'
                         . $row->learning_plan_detail_id, 'Edit')
-                ?>
+                    ?>
                             |<?=
-                anchor('learning_plan/delete_detail/'
-                        . $row->learning_plan_detail_id, 'Delete')
-                ?>                    
+                        anchor('learning_plan/delete_detail/'
+                                . $row->learning_plan_detail_id, 'Delete')
+                    ?>                    
                         </td>
                     </tr>
-<?php endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <p><?=
-anchor('learning_plan/create_detail/'
-        . $learning_plan->header->id, 'Add new Activity/Event')
-?>
+                anchor('learning_plan/create_detail/'
+                        . $learning_plan->header->id, 'Add new Activity/Event')
+                ?>
         </p>
     </body>
 </html>
