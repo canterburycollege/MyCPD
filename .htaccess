@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^(assets)($|/) - [L]
+RewriteCond $1 !^(index\.php|images|robots\.txt)
+RewriteRule ^(.*)$ /MyCPD/index.php/$1 [L]

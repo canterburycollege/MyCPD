@@ -37,8 +37,9 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
-$route['default_controller'] = "learning_plan/view";
+$route['default_controller'] = "hub/view";
+$route['learning_plan'] = "learning_plan/view";
+$route['target'] = "target/view";
 //$route['404_override'] = '';
 // codeigniter tutorial
 ##$route['news/create'] = 'news/create';
