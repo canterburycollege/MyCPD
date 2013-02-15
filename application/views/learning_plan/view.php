@@ -23,69 +23,73 @@
         <h2>Employee: <?= $employee->display_name ?></h2>
         <h3>Academic Year: <?= $learning_plan->header->academic_year ?></h3>
         <h3>Targets</h3>
-        <table id="table_target">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Sort order</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
-        <p><?=
-                anchor('learning_plan/create_target/'
-                        . $learning_plan->header->id, 'Add new Target')
-                ?>
-        </p>
-        <h3>Activities/Events</h3>
-        <table id="table_detail">
-            <thead>
-                <tr>
-                    <th>Title of CPD activity/event</th>
-                    <th>Intended Learning Outcomes</th>
-                    <th>target this CPD addresses</th>
-                    <th>Priority level</th>
-                    <th>Target Date</th>
-                    <th>Completed?</th>
-                    <th>Evaluation</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($learning_plan->details as $row): ?>
+        <div id="div_targets">
+            <table id="table_target">
+                <thead>
                     <tr>
-                        <td><?= $row->title ?></td>
-                        <td><?= $row->learning_outcomes ?></td>
-                        <td><?= $row->target_description ?></td>
-                        <td><?= $row->priority_type ?></td>
-                        <td><?= $row->target_date ?></td>
-                        <td><?= $row->is_completed ?></td>
-                        <td><?= anchor_popup($row->evaluation_url, 'Evaluate now') ?></td>
-                        <td><?=
-                anchor('learning_plan/update_detail/'
-                        . $row->learning_plan_detail_id, 'Edit')
-                    ?>
-                            |<?=
-                        anchor('learning_plan/delete_detail/'
-                                . $row->learning_plan_detail_id, 'Delete')
-                    ?>                    
-                        </td>
+                        <th>Description</th>
+                        <th>Sort order</th>
+                        <th>Actions</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <p><?=
-                anchor('learning_plan/create_detail/'
-                        . $learning_plan->header->id, 'Add new Activity/Event')
-                ?>
-        </p>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><?=
+anchor('learning_plan/create_target/'
+        . $learning_plan->header->id, 'Add new Target')
+?>
+            </p>
+        </div>
+        <div id="div_activities">
+            <h3>Activities/Events</h3>
+            <table id="table_detail">
+                <thead>
+                    <tr>
+                        <th>Title of CPD activity/event</th>
+                        <th>Intended Learning Outcomes</th>
+                        <th>target this CPD addresses</th>
+                        <th>Priority level</th>
+                        <th>Target Date</th>
+                        <th>Completed?</th>
+                        <th>Evaluation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($learning_plan->details as $row): ?>
+                        <tr>
+                            <td><?= $row->title ?></td>
+                            <td><?= $row->learning_outcomes ?></td>
+                            <td><?= $row->target_description ?></td>
+                            <td><?= $row->priority_type ?></td>
+                            <td><?= $row->target_date ?></td>
+                            <td><?= $row->is_completed ?></td>
+                            <td><?= anchor_popup($row->evaluation_url, 'Evaluate now') ?></td>
+                            <td><?=
+                    anchor('learning_plan/update_detail/'
+                            . $row->learning_plan_detail_id, 'Edit')
+                        ?>
+                                |<?=
+                            anchor('learning_plan/delete_detail/'
+                                    . $row->learning_plan_detail_id, 'Delete')
+                        ?>                    
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p><?=
+                    anchor('learning_plan/create_detail/'
+                            . $learning_plan->header->id, 'Add new Activity/Event')
+                    ?>
+            </p>
+        </div>
     </body>
 </html>
 
