@@ -45,7 +45,7 @@
                         <tr>
                             <td><?= $row->title ?></td>
                             <td><?= $row->learning_outcomes ?></td>
-                            <td><?= $row->target_description ?></td>
+                            <td><?= $row->target_title ?></td>
                             <td><?= $row->priority_type ?></td>
                             <td><?= $row->target_date ?></td>
                             <td><?= $row->is_completed ?></td>
