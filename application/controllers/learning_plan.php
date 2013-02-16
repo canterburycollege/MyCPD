@@ -92,7 +92,7 @@ class Learning_plan extends CI_Controller {
                 'learning_plan_id' => $learning_plan_id,
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
-                'learning_plan_target_id' => $this->input->post('learning_plan_target_id'),
+                'target_id' => $this->input->post('target_id'),
                 'priority_type_id' => $this->input->post('priority_type_id'),
                 'target_date' => $this->input->post('target_date')
             );

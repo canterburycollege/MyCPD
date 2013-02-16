@@ -19,9 +19,9 @@ class Learning_plan_model extends CI_Model {
     protected $tbl_learning_plan_detail = 'learning_plan_detail';
     /**
      *
-     * @var string Learning pla targets table name
+     * @var string Targets table name
      */
-    protected $tbl_learning_plan_target = 'learning_plan_target';
+    protected $tbl_target = 'target';
     /**
      *
      * @var string Priorities table name
@@ -201,10 +201,8 @@ class Learning_plan_model extends CI_Model {
      */
     public function get_target_options($learning_plan_id){
         
-        $data = array();
-        $this->db
-                ->order_by('sort_order', 'asc');
-        $query = $this->db->get($this->tbl_learning_plan_target);
+        $rows = array();
+        $query = $this->db->get($this->tbl_target);
         foreach ($query->result() as $row){
             $description = $row->sort_order . '. ' . $row->description;
             $rows[$row->id] = $description;

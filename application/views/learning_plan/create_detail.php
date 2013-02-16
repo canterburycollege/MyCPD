@@ -29,7 +29,7 @@
             <textarea name="learning_outcomes"></textarea><br />
 
             <label for="learning_plan_target_id">Target</label>
-            <?= form_dropdown('learning_plan_target_id',$targets) ?><br />
+            <?= form_dropdown('target_id',$targets) ?><br />
 
             <label for="priority_type_id">Priority</label>
             <?= form_dropdown('priority_type_id',$priorities) ?><br />
