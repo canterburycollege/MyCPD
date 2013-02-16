@@ -72,9 +72,12 @@ class Learning_plan_model extends CI_Model {
      * Delele learning plan detail from db
      * 
      * @param integer $id Learning plan detail row id
+     * 
+     * @return integer Number of rows deleted
      */
     public function delete_detail($id){
-        
+        $this->db->delete($this->tbl_learning_plan_detail, array('id' => $id));
+        return $this->db->affected_rows();
     }
     
     /**
@@ -204,8 +207,8 @@ class Learning_plan_model extends CI_Model {
         $rows = array();
         $query = $this->db->get($this->tbl_target);
         foreach ($query->result() as $row){
-            $description = $row->sort_order . '. ' . $row->description;
-            $rows[$row->id] = $description;
+            $title = $row->title;
+            $rows[$row->id] = $title;
         }
         
         return $rows;

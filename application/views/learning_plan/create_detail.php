@@ -3,13 +3,6 @@
         <title>MyCPD Hub</title>
         <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-        <script>
-            $(function() {
-                $( "#target_date" ).datepicker({dateFormat: 'yy-mm-dd'});
-            });
-        </script>
     </head>
     <body>
         <h1>My CPD Hub</h1>
@@ -33,9 +26,6 @@
 
             <label for="priority_type_id">Priority</label>
             <?= form_dropdown('priority_type_id',$priorities) ?><br />
-
-            <label for="target_date">Target Date</label>
-            <input type="text" name="target_date" id="target_date" /><br />
 
             <input type="submit" name="submit" value="Submit" /> 
             <input type="reset" name="reset" value="Reset" />
