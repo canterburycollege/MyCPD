@@ -93,8 +93,7 @@ class Learning_plan extends CI_Controller {
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
                 'target_id' => $this->input->post('target_id'),
-                'priority_type_id' => $this->input->post('priority_type_id'),
-                'target_date' => $this->input->post('target_date')
+                'priority_type_id' => $this->input->post('priority_type_id')
             );
 
             $this->learning_plan_model->create_detail($form_data);
@@ -103,7 +102,7 @@ class Learning_plan extends CI_Controller {
             $employee = $this->employee_model->get_employee($this->employee_id);
             $data['employee'] = $employee;
             $data['learning_plans'] =
-                    $this->learning_plan_model->get_learning_plans($this->employee_id);
+                    $this->learning_plan_model->get_header_list($this->employee_id);
             $data['learning_plan'] =
                     $this->learning_plan_model->get_learning_plan($learning_plan_id);
 
@@ -136,7 +135,8 @@ class Learning_plan extends CI_Controller {
      * @param integer $id Learning plan detail row id
      */
     public function delete_detail($id) {
-        $this->load->view('learning_plan/delete_detail');
+        $this->learning_plan_model->delete_detail($id);
+        $this->view();
     }
 
     /**
