@@ -12,7 +12,7 @@ class Target_model extends CI_Model {
      *
      * @var string Targets table name
      */
-    protected $tbl_targets = 'target';
+    protected $tbl_target = 'target';
 
 
         protected $employee_id;
@@ -48,7 +48,7 @@ class Target_model extends CI_Model {
             'target_date' => $this->input->post('target_date')
         );
 
-        return $this->db->insert('targets', $data);
+        return $this->db->insert($this->tbl_target, $data);
     }
 
     /**
