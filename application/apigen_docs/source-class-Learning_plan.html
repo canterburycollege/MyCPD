@@ -137,7 +137,7 @@
 </span><span id="61" class="l"><a class="l" href="#61"> 61: </a>                <span class="php-quote">'target_date'</span> =&gt; <span class="php-var">$this</span>-&gt;input-&gt;post(<span class="php-quote">'target_date'</span>)
 </span><span id="62" class="l"><a class="l" href="#62"> 62: </a>            );
 </span><span id="63" class="l"><a class="l" href="#63"> 63: </a>
-</span><span id="64" class="l"><a class="l" href="#64"> 64: </a>            <span class="php-var">$this</span>-&gt;learning_plan_model-&gt;create_learning_plan_detail(<span class="php-var">$form_data</span>);
+</span><span id="64" class="l"><a class="l" href="#64"> 64: </a>            <span class="php-var">$this</span>-&gt;learning_plan_model-&gt;create_activity(<span class="php-var">$form_data</span>);
 </span><span id="65" class="l"><a class="l" href="#65"> 65: </a>            
 </span><span id="66" class="l"><a class="l" href="#66"> 66: </a>            <span class="php-comment">// get extra data to load view page</span>
 </span><span id="67" class="l"><a class="l" href="#67"> 67: </a>            <span class="php-var">$employee</span> = <span class="php-var">$this</span>-&gt;employee_model-&gt;get_employee(<span class="php-var">$this</span>-&gt;employee_id);

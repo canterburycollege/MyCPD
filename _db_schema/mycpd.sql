@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS `learning_plan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `learning_plan_detail`
+-- Table structure for table `activity`
 --
 
-CREATE TABLE IF NOT EXISTS `learning_plan_detail` (
+CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `learning_plan_id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
@@ -130,11 +130,11 @@ CREATE TABLE IF NOT EXISTS `target_status` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_learning_plan_detail`
+-- Stand-in structure for view `v_activity`
 --
-CREATE TABLE IF NOT EXISTS `v_learning_plan_detail` (
+CREATE TABLE IF NOT EXISTS `v_activity` (
 `learning_plan_id` int(11)
-,`learning_plan_detail_id` int(11)
+,`activity_id` int(11)
 ,`title` varchar(250)
 ,`learning_outcomes` varchar(250)
 ,`target_description` varchar(600)
@@ -162,11 +162,11 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_learning_plan_detail`
+-- Structure for view `v_activity`
 --
-DROP TABLE IF EXISTS `v_learning_plan_detail`;
+DROP TABLE IF EXISTS `v_activity`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_learning_plan_detail` AS select `lpd`.`learning_plan_id` AS `learning_plan_id`,`lpd`.`id` AS `learning_plan_detail_id`,`lpd`.`title` AS `title`,`lpd`.`learning_outcomes` AS `learning_outcomes`,`t`.`title` AS `target_title`,`t`.`description` AS `target_description`,`pt`.`description` AS `priority_type`,`t`.`target_date` AS `target_date`,`ts`.`title` AS `target_status`,`ts`.`sort_order` AS `target_status_sort_order`,(case when (`lpd`.`is_completed` = 1) then 'Y' else 'N' end) AS `is_completed`,`lpd`.`evaluation_url` AS `evaluation_url`,`pt`.`sort_order` AS `priority_sort_order` from (((`learning_plan_detail` `lpd` left join `target` `t` on((`lpd`.`target_id` = `t`.`id`))) left join `target_status` `ts` on((`t`.`status_id` = `ts`.`id`))) left join `priority_type` `pt` on((`lpd`.`priority_type_id` = `pt`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity` AS select `lpd`.`learning_plan_id` AS `learning_plan_id`,`lpd`.`id` AS `activity_id`,`lpd`.`title` AS `title`,`lpd`.`learning_outcomes` AS `learning_outcomes`,`t`.`title` AS `target_title`,`t`.`description` AS `target_description`,`pt`.`description` AS `priority_type`,`t`.`target_date` AS `target_date`,`ts`.`title` AS `target_status`,`ts`.`sort_order` AS `target_status_sort_order`,(case when (`lpd`.`is_completed` = 1) then 'Y' else 'N' end) AS `is_completed`,`lpd`.`evaluation_url` AS `evaluation_url`,`pt`.`sort_order` AS `priority_sort_order` from (((`activity` `lpd` left join `target` `t` on((`lpd`.`target_id` = `t`.`id`))) left join `target_status` `ts` on((`t`.`status_id` = `ts`.`id`))) left join `priority_type` `pt` on((`lpd`.`priority_type_id` = `pt`.`id`)));
 
 -- --------------------------------------------------------
 
@@ -188,12 +188,12 @@ ALTER TABLE `learning_plan`
   ADD CONSTRAINT `Learning_plan_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
 
 --
--- Constraints for table `learning_plan_detail`
+-- Constraints for table `activity`
 --
-ALTER TABLE `learning_plan_detail`
-  ADD CONSTRAINT `Learning_plan_detail_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `learning_plan` (`id`),
-  ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`),
-  ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`);
+ALTER TABLE `activity`
+  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `learning_plan` (`id`),
+  ADD CONSTRAINT `activity_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`),
+  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`);
 
 --
 -- Constraints for table `target`

@@ -16,7 +16,7 @@ class Learning_plan_model extends CI_Model {
      *
      * @var string Learning plan detail table name
      */
-    protected $tbl_learning_plan_detail = 'learning_plan_detail';
+    protected $tbl_activity = 'activity';
     /**
      *
      * @var string Targets table name
@@ -31,7 +31,7 @@ class Learning_plan_model extends CI_Model {
      *
      * @var string Learning plan view name - joins all related tables
      */
-    protected $v_learning_plan_detail = 'v_learning_plan_detail';
+    protected $v_activity = 'v_activity';
     
 
     public function __construct() {
@@ -48,12 +48,12 @@ class Learning_plan_model extends CI_Model {
     }
     
     /**
-     * Add new learning plan detail to db
+     * Add new activity to db
      * 
      * @param array $data Array of key=>value pairs containing data to be added
      */
     public function create_detail($data){
-        $this->db->insert($this->tbl_learning_plan_detail, $data); 
+        $this->db->insert($this->tbl_activity, $data); 
     }
     
     /**
@@ -76,7 +76,7 @@ class Learning_plan_model extends CI_Model {
      * @return integer Number of rows deleted
      */
     public function delete_detail($id){
-        $this->db->delete($this->tbl_learning_plan_detail, array('id' => $id));
+        $this->db->delete($this->tbl_activity, array('id' => $id));
         return $this->db->affected_rows();
     }
     
@@ -148,7 +148,7 @@ class Learning_plan_model extends CI_Model {
     protected function get_detail($learning_plan_id){
         
         $rows = array();
-        $query = $this->db->get_where($this->v_learning_plan_detail, 
+        $query = $this->db->get_where($this->v_activity, 
                 array('learning_plan_id' => $learning_plan_id));
         
         foreach ($query->result() as $row){
@@ -171,10 +171,10 @@ class Learning_plan_model extends CI_Model {
     /**
      * Edit learning plan detail in db
      * 
-     * @param integer $learning_plan_detail_id
+     * @param integer $activity_id
      * @param array $data Array of key=>value pairs containing data to be edited
      */
-    public function update_detail($learning_plan_detail_id,$data){
+    public function update_detail($activity_id,$data){
         
     }
     

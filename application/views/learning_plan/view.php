@@ -52,11 +52,11 @@
                             <td><?= anchor_popup($row->evaluation_url, 'Evaluate now') ?></td>
                             <td><?=
                     anchor('learning_plan/update_detail/'
-                            . $row->learning_plan_detail_id, 'Edit')
+                            . $row->activity_id, 'Edit')
                         ?>
                                 |<?=
                             anchor('learning_plan/delete_detail/'
-                                    . $row->learning_plan_detail_id, 'Delete')
+                                    . $row->activity_id, 'Delete')
                         ?>                    
                             </td>
                         </tr>
