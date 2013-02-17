@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2013 at 03:59 PM
+-- Generation Time: Feb 17, 2013 at 09:56 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -19,9 +19,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `mycpd`
 --
-DROP DATABASE `mycpd`;
-CREATE DATABASE `mycpd` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `mycpd`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity`
+--
+
+CREATE TABLE IF NOT EXISTS `activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `learning_plan_id` int(11) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `provider` varchar(250) NOT NULL,
+  `learning_outcomes` varchar(250) NOT NULL,
+  `cpd_type_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
+  `priority_type_id` int(11) NOT NULL,
+  `is_completed` tinyint(1) NOT NULL DEFAULT '0',
+  `evaluation_url` varchar(50) NOT NULL,
+  `hours_of_cpd` decimal(7,2) NOT NULL,
+  `rating` int(1) NOT NULL COMMENT 'rating out of 5',
+  PRIMARY KEY (`id`),
+  KEY `learning_plan_id` (`learning_plan_id`),
+  KEY `learning_plan_target_id` (`target_id`),
+  KEY `priority_type_id` (`priority_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -35,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `moodle_user_id` int(11) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -50,28 +72,7 @@ CREATE TABLE IF NOT EXISTS `learning_plan` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `learning_plan_unq` (`employee_id`,`academic_year`),
   KEY `employee_id` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `activity`
---
-
-CREATE TABLE IF NOT EXISTS `activity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `learning_plan_id` int(11) NOT NULL,
-  `title` varchar(250) NOT NULL,
-  `learning_outcomes` varchar(250) NOT NULL,
-  `target_id` int(11) NOT NULL,
-  `priority_type_id` int(11) NOT NULL,
-  `is_completed` tinyint(1) NOT NULL DEFAULT '0',
-  `evaluation_url` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `learning_plan_id` (`learning_plan_id`),
-  KEY `learning_plan_target_id` (`target_id`),
-  KEY `priority_type_id` (`priority_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `priority_type` (
   `description` varchar(50) NOT NULL,
   `sort_order` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `target_status` (
   `title` varchar(50) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -137,6 +138,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 ,`activity_id` int(11)
 ,`title` varchar(250)
 ,`learning_outcomes` varchar(250)
+,`target_title` varchar(150)
 ,`target_description` varchar(600)
 ,`priority_type` varchar(50)
 ,`target_date` varchar(20)
@@ -182,18 +184,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`localhost` SQL SECURITY DEFINE
 --
 
 --
+-- Constraints for table `activity`
+--
+ALTER TABLE `activity`
+  ADD CONSTRAINT `Learning_plan_detail_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `learning_plan` (`id`),
+  ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`),
+  ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
+
+--
 -- Constraints for table `learning_plan`
 --
 ALTER TABLE `learning_plan`
   ADD CONSTRAINT `Learning_plan_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
-
---
--- Constraints for table `activity`
---
-ALTER TABLE `activity`
-  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `learning_plan` (`id`),
-  ADD CONSTRAINT `activity_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`),
-  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`);
 
 --
 -- Constraints for table `target`
