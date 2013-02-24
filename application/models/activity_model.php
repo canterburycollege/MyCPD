@@ -10,6 +10,7 @@ class Activity_model extends CI_Model {
     protected $tbl_activity = 'activity';
     protected $tbl_cpd_type = 'priority_type';
     protected $tbl_priority_type = 'priority_type';
+    protected $tbl_target = 'target';
     protected $v_activity = 'v_activity';
 
     public function __construct() {
@@ -76,6 +77,23 @@ class Activity_model extends CI_Model {
         $query = $this->db->get($this->tbl_priority_type);
         foreach ($query->result() as $row) {
             $rows[$row->id] = $row->description;
+        }
+
+        return $rows;
+    }
+    
+    /**
+     * Query db for array of targets to use as select options
+     * 
+     * @return array Array of target objects
+     */
+    public function get_target_options($employee_id) {
+
+        $data = array();
+        $this->db->where('employee_id', $employee_id);
+        $query = $this->db->get($this->tbl_target);
+        foreach ($query->result() as $row) {
+            $rows[$row->id] = $row->title;
         }
 
         return $rows;

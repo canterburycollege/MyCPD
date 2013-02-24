@@ -43,11 +43,11 @@
                             <td><?= $row->completed_date ?></td>
                             <td><?= anchor_popup($row->evaluation_url, 'Evaluate now') ?></td>
                             <td><?=
-                    anchor('learning_plan/update_detail/'
+                    anchor('learning_plan/update_activity/'
                             . $row->id, 'Edit')
                         ?>
                                 |<?=
-                            anchor('learning_plan/delete_detail/'
+                            anchor('learning_plan/delete_activity/'
                                     . $row->id, 'Delete')
                         ?>                    
                             </td>

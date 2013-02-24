@@ -34,7 +34,7 @@ class Learning_plan extends CI_Controller {
         $this->load->helper(array('form','url_helper'));
         $this->load->library('form_validation');
         $this->load->model(array(
-            'activity_model','auth_user_model','employee_model','learning_plan_model'));
+            'activity_model','auth_user_model','employee_model'));
 
         $this->form_validation
             ->set_error_delimiters('<div class="form_error">', '</div>');
@@ -45,8 +45,8 @@ class Learning_plan extends CI_Controller {
     
     
     public function create_activity($employee_id){
-        $data['employee_id'] = $learning_plan_id;
-        $data['cpd_types'] = $this->activity_model->get_cpd_types();
+        $data['employee_id'] = $employee_id;
+        $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
         $data['targets'] = $this->activity_model->get_target_options($employee_id);
         $data['title'] = 'Create a Learning Plan Activity/Event';
@@ -57,7 +57,7 @@ class Learning_plan extends CI_Controller {
         ;
 
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('learning_plan/create_detail', $data);
+            $this->load->view('learning_plan/create_activity', $data);
         } else {
             $form_data = array(
                 'employee_id' => $employee_id,
@@ -67,15 +67,9 @@ class Learning_plan extends CI_Controller {
                 'priority_type_id' => $this->input->post('priority_type_id')
             );
 
-            $this->learning_plan_model->create_detail($form_data);
-
             // get extra data to load view page
             $employee = $this->employee_model->get_employee($this->employee_id);
             $data['employee'] = $employee;
-            $data['learning_plans'] =
-                    $this->learning_plan_model->get_header_list($this->employee_id);
-            $data['learning_plan'] =
-                    $this->learning_plan_model->get_learning_plan($learning_plan_id);
 
             //$this->load->view('templates/header', $data);
             if (empty($data['learning_plan'])) {

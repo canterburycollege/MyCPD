@@ -9,9 +9,9 @@
    
         <?= validation_errors(); ?>
 
-        <?= form_open('learning_plan/create_detail/' . $learning_plan_id) ?>
+        <?= form_open('learning_plan/create_activity/' . $employee_id) ?>
 
-        <input type="hidden" name="learning_plan_id" value="<?= $learning_plan_id ?>" />
+        <input type="hidden" name="employee_id" value="<?= $employee_id ?>" />
 
         <fieldset>
             <legend>Add new activity/event</legend>
