@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2013 at 09:56 PM
+-- Generation Time: Feb 24, 2013 at 09:14 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -26,24 +26,43 @@ SET time_zone = "+00:00";
 -- Table structure for table `activity`
 --
 
+DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `learning_plan_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `learning_plan_id` int(11) DEFAULT NULL,
   `title` varchar(250) NOT NULL,
   `provider` varchar(250) NOT NULL,
   `learning_outcomes` varchar(250) NOT NULL,
-  `cpd_type_id` int(11) NOT NULL,
+  `planned_date` date NOT NULL,
+  `cpd_type_id` int(11) DEFAULT NULL,
   `target_id` int(11) NOT NULL,
-  `priority_type_id` int(11) NOT NULL,
-  `is_completed` tinyint(1) NOT NULL DEFAULT '0',
-  `evaluation_url` varchar(50) NOT NULL,
+  `priority_type_id` int(11) DEFAULT NULL,
+  `completed_date` date DEFAULT NULL,
+  `evaluation_url` varchar(50) DEFAULT NULL,
   `hours_of_cpd` decimal(7,2) NOT NULL,
-  `rating` int(1) NOT NULL COMMENT 'rating out of 5',
+  `rating` int(1) DEFAULT NULL COMMENT 'rating out of 5',
   PRIMARY KEY (`id`),
   KEY `learning_plan_id` (`learning_plan_id`),
   KEY `learning_plan_target_id` (`target_id`),
-  KEY `priority_type_id` (`priority_type_id`)
+  KEY `priority_type_id` (`priority_type_id`),
+  KEY `employee_id` (`employee_id`),
+  KEY `cpd_type_id` (`cpd_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cpd_type`
+--
+
+DROP TABLE IF EXISTS `cpd_type`;
+CREATE TABLE IF NOT EXISTS `cpd_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(50) NOT NULL,
+  `sort_order` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -51,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
@@ -62,24 +82,10 @@ CREATE TABLE IF NOT EXISTS `employee` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `learning_plan`
---
-
-CREATE TABLE IF NOT EXISTS `learning_plan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` int(11) NOT NULL,
-  `academic_year` int(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `learning_plan_unq` (`employee_id`,`academic_year`),
-  KEY `employee_id` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `description` varchar(500) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -90,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Table structure for table `priority_type`
 --
 
+DROP TABLE IF EXISTS `priority_type`;
 CREATE TABLE IF NOT EXISTS `priority_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -103,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `priority_type` (
 -- Table structure for table `target`
 --
 
+DROP TABLE IF EXISTS `target`;
 CREATE TABLE IF NOT EXISTS `target` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) DEFAULT NULL,
@@ -121,38 +129,43 @@ CREATE TABLE IF NOT EXISTS `target` (
 -- Table structure for table `target_status`
 --
 
+DROP TABLE IF EXISTS `target_status`;
 CREATE TABLE IF NOT EXISTS `target_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_activity`
 --
+DROP VIEW IF EXISTS `v_activity`;
 CREATE TABLE IF NOT EXISTS `v_activity` (
-`learning_plan_id` int(11)
-,`activity_id` int(11)
+`id` int(11)
+,`employee_id` int(11)
 ,`title` varchar(250)
+,`provider` varchar(250)
 ,`learning_outcomes` varchar(250)
-,`target_title` varchar(150)
-,`target_description` varchar(600)
+,`planned_date` date
+,`cpd_type_id` int(11)
+,`cpd_type` varchar(50)
+,`target_id` int(11)
+,`priority_type_id` int(11)
 ,`priority_type` varchar(50)
-,`target_date` varchar(20)
-,`target_status` varchar(50)
-,`target_status_sort_order` int(11)
-,`is_completed` varchar(1)
+,`completed_date` date
 ,`evaluation_url` varchar(50)
-,`priority_sort_order` int(2)
+,`hours_of_cpd` decimal(7,2)
+,`rating` int(1)
 );
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_targets_with_status`
 --
+DROP VIEW IF EXISTS `v_targets_with_status`;
 CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 `id` int(11)
 ,`title` varchar(150)
@@ -168,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 --
 DROP TABLE IF EXISTS `v_activity`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity` AS select `lpd`.`learning_plan_id` AS `learning_plan_id`,`lpd`.`id` AS `activity_id`,`lpd`.`title` AS `title`,`lpd`.`learning_outcomes` AS `learning_outcomes`,`t`.`title` AS `target_title`,`t`.`description` AS `target_description`,`pt`.`description` AS `priority_type`,`t`.`target_date` AS `target_date`,`ts`.`title` AS `target_status`,`ts`.`sort_order` AS `target_status_sort_order`,(case when (`lpd`.`is_completed` = 1) then 'Y' else 'N' end) AS `is_completed`,`lpd`.`evaluation_url` AS `evaluation_url`,`pt`.`sort_order` AS `priority_sort_order` from (((`activity` `lpd` left join `target` `t` on((`lpd`.`target_id` = `t`.`id`))) left join `target_status` `ts` on((`t`.`status_id` = `ts`.`id`))) left join `priority_type` `pt` on((`lpd`.`priority_type_id` = `pt`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity` AS (select `activity`.`id` AS `id`,`activity`.`employee_id` AS `employee_id`,`activity`.`title` AS `title`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from ((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))));
 
 -- --------------------------------------------------------
 
@@ -187,15 +200,10 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`mycpd_admin`@`localhost` SQL SECURITY DEFINE
 -- Constraints for table `activity`
 --
 ALTER TABLE `activity`
-  ADD CONSTRAINT `Learning_plan_detail_ibfk_1` FOREIGN KEY (`learning_plan_id`) REFERENCES `learning_plan` (`id`),
+  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`cpd_type_id`) REFERENCES `cpd_type` (`id`),
+  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
-
---
--- Constraints for table `learning_plan`
---
-ALTER TABLE `learning_plan`
-  ADD CONSTRAINT `Learning_plan_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
 
 --
 -- Constraints for table `target`

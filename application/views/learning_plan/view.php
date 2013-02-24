@@ -37,18 +37,18 @@
                         <tr>
                             <td><?= $row->title ?></td>
                             <td><?= $row->learning_outcomes ?></td>
-                            <td><?= $row->target_title ?></td>
+                            <td><?= $row->target ?></td>
                             <td><?= $row->priority_type ?></td>
-                            <td><?= $row->target_date ?></td>
-                            <td><?= $row->is_completed ?></td>
+                            <td><?= $row->planned_date ?></td>
+                            <td><?= $row->completed_date ?></td>
                             <td><?= anchor_popup($row->evaluation_url, 'Evaluate now') ?></td>
                             <td><?=
                     anchor('learning_plan/update_detail/'
-                            . $row->activity_id, 'Edit')
+                            . $row->id, 'Edit')
                         ?>
                                 |<?=
                             anchor('learning_plan/delete_detail/'
-                                    . $row->activity_id, 'Delete')
+                                    . $row->id, 'Delete')
                         ?>                    
                             </td>
                         </tr>
