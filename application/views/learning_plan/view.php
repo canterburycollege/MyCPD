@@ -17,14 +17,6 @@
     <body>
         <h1>My Learning Plan</h1>
         <h2>Employee: <?= $employee->display_name ?></h2>
-        <h3>Academic Year: <?= $learning_plan->header->academic_year ?></h3>
-
-        <div id="div_targets">
-            <p>
-                <?= anchor('/target/view', 'Go to Targets Page') ?>
-                -- Maybe the targets page could load into an accordion, here?
-            </p>
-        </div>
         <div id="div_activities">
             <h3>Activities/Events</h3>
             <table id="table_detail">
@@ -41,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($learning_plan->details as $row): ?>
+                    <?php foreach ($activities as $row): ?>
                         <tr>
                             <td><?= $row->title ?></td>
                             <td><?= $row->learning_outcomes ?></td>
@@ -64,8 +56,8 @@
                 </tbody>
             </table>
             <p><?=
-                    anchor('learning_plan/create_detail/'
-                            . $learning_plan->header->id, 'Add new Activity/Event')
+                    anchor('learning_plan/create_activity/'
+                            . $employee->id, 'Add new Activity/Event')
                     ?>
             </p>
         </div>

@@ -9,9 +9,9 @@
  * @uses helper url_helper
  * @uses library form_validation
  * 
+ * @uses model activity
  * @uses model auth_user_model
  * @uses model employee_model
- * @uses model learning_plan_model
  * 
  */
 class Learning_plan extends CI_Controller {
@@ -21,13 +21,6 @@ class Learning_plan extends CI_Controller {
      * @var string
      */
     private $controller = 'controller/learning_plan';
-    
-    /**
-     * @todo set up constant for current year
-     *
-     * @var integer 
-     */
-    private $current_year = '2012';
 
     /**
      *
@@ -35,15 +28,13 @@ class Learning_plan extends CI_Controller {
      */
     protected $employee_id;
 
-    /**
-     * 
-     */
+    
     public function __construct() {
         parent::__construct();
         $this->load->helper(array('form','url_helper'));
         $this->load->library('form_validation');
         $this->load->model(array(
-            'auth_user_model','employee_model','learning_plan_model'));
+            'activity_model','auth_user_model','employee_model','learning_plan_model'));
 
         $this->form_validation
             ->set_error_delimiters('<div class="form_error">', '</div>');
@@ -51,33 +42,13 @@ class Learning_plan extends CI_Controller {
         $this->employee_id = 
                 $this->auth_user_model->get_auth_user()->employee_id;
     }
-
-    /**
-     * Creating a new learning plan header
-     * 
-     * @param integer $employee_id 
-     * @param integer $academic_year 
-     */
-    public function create_header($employee_id, $academic_year) {
-        
-        $form_data = array(
-            'employee_id' => $employee_id,
-            'academic_year' => $academic_year
-            );
-        
-        $this->learning_plan_model->create_header($form_data);
-    }
-
-    /**
-     * Loads page used for creating a new Learning Plan Detail (e.g. activity)
-     * 
-     * @param integer $learning_plan_id Learning plan header row id
-     */
-    public function create_detail($learning_plan_id) {
-
-        $data['learning_plan_id'] = $learning_plan_id;
-        $data['priorities'] = $this->learning_plan_model->get_priority_options();
-        $data['targets'] = $this->learning_plan_model->get_target_options($learning_plan_id);
+    
+    
+    public function create_activity($employee_id){
+        $data['employee_id'] = $learning_plan_id;
+        $data['cpd_types'] = $this->activity_model->get_cpd_types();
+        $data['priorities'] = $this->activity_model->get_priority_options();
+        $data['targets'] = $this->activity_model->get_target_options($employee_id);
         $data['title'] = 'Create a Learning Plan Activity/Event';
 
         $this->form_validation
@@ -89,7 +60,7 @@ class Learning_plan extends CI_Controller {
             $this->load->view('learning_plan/create_detail', $data);
         } else {
             $form_data = array(
-                'learning_plan_id' => $learning_plan_id,
+                'employee_id' => $employee_id,
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
                 'target_id' => $this->input->post('target_id'),
@@ -128,24 +99,10 @@ class Learning_plan extends CI_Controller {
          */
         $this->load->view('learning_plan/create_target');
     }
-
-    /**
-     * Loads page to delete a given learning plan detail row
-     * 
-     * @param integer $id Learning plan detail row id
-     */
-    public function delete_detail($id) {
-        $this->learning_plan_model->delete_detail($id);
+    
+    public function delete_activity($id){
+        $this->activity_model->delete($id);
         $this->view();
-    }
-
-    /**
-     * Loads page to update given learning plan detail row
-     * 
-     * @param integer $id Learning plan detail row id
-     */
-    public function update_detail($id) {
-        $this->load->view('learning_plan/update_detail');
     }
 
     /**
@@ -161,27 +118,14 @@ class Learning_plan extends CI_Controller {
                     . $this->employee_id . ') in database');
         }
 
-        $learning_plan_list =
-                $this->learning_plan_model->get_header_list($this->employee_id);
-        if (empty($learning_plan_list)) {
-            $this->create_header($this->employee_id,$this->current_year);
-        }
-
-        $learning_plan_id =
-                $this->learning_plan_model->get_latest_header_id($this->employee_id);
-        if (empty($learning_plan_id)) {
-            $this->create_header($this->employee_id);
-        }
-
-        $learning_plan =
-                $this->learning_plan_model->get_learning_plan($learning_plan_id);
-        if (empty($learning_plan)) {
-            show_error($err_msg . ': cannot find learning plan in database');
+        $activities =
+                $this->activity_model->get_employee_activities($this->employee_id);
+        if (empty($activities)) {
+            show_error($err_msg . ': cannot find any activities in database');
         }
 
         $data['employee'] = $employee;
-        $data['learning_plan_list'] = $learning_plan_list;
-        $data['learning_plan'] = $learning_plan;
+        $data['activities'] = $activities;
 
         //$this->load->view('templates/header', $data);
         $this->load->view('learning_plan/view', $data);
