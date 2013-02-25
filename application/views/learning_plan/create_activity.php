@@ -5,13 +5,11 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     </head>
     <body>
-        <h1>My CPD Hub</h1>
+        <h1>MyCPD</h1>
    
         <?= validation_errors(); ?>
 
         <?= form_open('learning_plan/create_activity/' . $employee_id) ?>
-
-        <input type="hidden" name="employee_id" value="<?= $employee_id ?>" />
 
         <fieldset>
             <legend>Add new activity/event</legend>

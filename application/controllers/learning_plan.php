@@ -43,11 +43,10 @@ class Learning_plan extends CI_Controller {
     }
 
     public function create_activity($employee_id) {
-        $data['employee_id'] = $employee_id;
+
         $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
         $data['targets'] = $this->activity_model->get_target_options($employee_id);
-        $data['title'] = 'Create a Learning Plan Activity/Event';
 
         $this->form_validation
                 ->set_rules('title', 'Title', 'required')
@@ -65,12 +64,8 @@ class Learning_plan extends CI_Controller {
                 'priority_type_id' => $this->input->post('priority_type_id')
             );
 
-            // get extra data to load view page
-            $employee = $this->employee_model->get_employee($this->employee_id);
-            $data['employee'] = $employee;
-
             $rows_inserted = $this->activity_model->create($form_data);
-            if($rows_inserted < 1){
+            if ($rows_inserted < 1) {
                 /**
                  * @todo Redirect to error page
                  */
@@ -95,8 +90,51 @@ class Learning_plan extends CI_Controller {
     }
 
     public function delete_activity($id) {
-        $this->activity_model->delete($id);
-        $this->view();
+        $rows_deleted = $this->activity_model->delete($id);
+        if ($rows_deleted < 1) {
+            /**
+             * @todo Redirect to error page
+             */
+            echo 'Error message';
+        } else {
+            redirect('/learning_plan/view', 'refresh');
+        }
+    }
+
+    public function update_activity($id) {
+
+        $data['activity'] = $this->activity_model->get_activity($id);
+        $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
+        $data['priorities'] = $this->activity_model->get_priority_options();
+        $data['targets'] = $this->activity_model->get_target_options($this->employee_id);
+
+        $this->form_validation
+                ->set_rules('title', 'Title', 'required')
+                ->set_rules('learning_outcomes', 'Learning outcomes', 'required')
+        ;
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('learning_plan/update_activity', $data);
+        } else {
+            $form_data = array(
+                'employee_id' => $this->employee_id,
+                'title' => $this->input->post('title'),
+                'learning_outcomes' => $this->input->post('learning_outcomes'),
+                'target_id' => $this->input->post('target_id'),
+                'priority_type_id' => $this->input->post('priority_type_id')
+            );
+
+            $rows_updated = $this->activity_model->update($id, $form_data);
+            if ($rows_updated < 1) {
+                /**
+                 * @todo Redirect to error page
+                 */
+                echo 'error message';
+            } else {
+                redirect('/learning_plan/view', 'refresh');
+            }
+            //$this->load->view('templates/header', $data);
+        }
     }
 
     /**
@@ -129,4 +167,4 @@ class Learning_plan extends CI_Controller {
 }
 
 /* End of file learning_plan.php */
-/* Location: ./controllers/learning_plan.php */
+    /* Location: ./controllers/learning_plan.php */

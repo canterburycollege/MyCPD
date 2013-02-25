@@ -8,7 +8,7 @@
 class Activity_model extends CI_Model {
 
     protected $tbl_activity = 'activity';
-    protected $tbl_cpd_type = 'priority_type';
+    protected $tbl_cpd_type = 'cpd_type';
     protected $tbl_priority_type = 'priority_type';
     protected $tbl_target = 'target';
     protected $v_activity = 'v_activity';
@@ -30,8 +30,7 @@ class Activity_model extends CI_Model {
     public function get_activity($id) {
 
         $query = $this->db->get_where($this->v_activity, array('id' => $id));
-
-        return $query->result();
+        return $query->row();
     }
 
     /**
@@ -103,6 +102,7 @@ class Activity_model extends CI_Model {
     public function update($id, $data) {
         $this->db->where('id', $id);
         $this->db->update($this->tbl_activity, $data);
+        return $this->db->affected_rows();
     }
 
 }
