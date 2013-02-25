@@ -3,6 +3,8 @@
         <title>MyCPD Hub</title>
         <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
         <script>
             $(function() {
                 $( "#planned_date" ).datepicker({dateFormat: 'yy-mm-dd'});
@@ -11,17 +13,16 @@
     </head>
     <body>
         <h1>MyCPD</h1>
-   
+  
         <?= validation_errors(); ?>
 
-        <?= form_open('learning_plan/create_activity/' . $employee_id) ?>
+        <?= form_open('learning_plan/create_activity/') ?>
 
         <fieldset>
             <legend>Add new activity/event</legend>
             
             <label for="planned_date">Planned date</label>
-            <input type="text" name="planned_date" id="planned_date" 
-                   value="<?= $activity->planned_date ?>" /><br />
+            <input type="text" name="planned_date" id="planned_date" /><br />
             
             <label for="title">Title of activity/event</label> 
             <textarea name="title"></textarea><br />
