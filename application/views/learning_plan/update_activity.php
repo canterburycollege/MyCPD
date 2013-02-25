@@ -3,6 +3,14 @@
         <title>MyCPD Hub</title>
         <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $( "#planned_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+                $( "#completed_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+            });
+        </script>
     </head>
     <body>
         <h1>MyCPD</h1>
@@ -45,7 +53,7 @@
             <label for="rating">Rating (1..5)</label>
             <input type="text" name="rating" id="rating" 
                    value="<?= $activity->rating ?>" /><br />
-
+            <br />
             <input type="submit" name="submit" value="Submit" /> 
             <input type="reset" name="reset" value="Reset" />
         </fieldset>

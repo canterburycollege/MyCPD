@@ -58,8 +58,10 @@ class Learning_plan extends CI_Controller {
         } else {
             $form_data = array(
                 'employee_id' => $employee_id,
+                'planned_date' => $this->input->post('planned_date'),
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
+                'cpd_type_id' => $this->input->post('cpd_type_id'),
                 'target_id' => $this->input->post('target_id'),
                 'priority_type_id' => $this->input->post('priority_type_id')
             );
