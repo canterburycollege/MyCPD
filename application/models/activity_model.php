@@ -19,6 +19,7 @@ class Activity_model extends CI_Model {
 
     public function create($data) {
         $this->db->insert($this->tbl_activity, $data);
+        return $this->db->affected_rows();
     }
 
     public function delete($id) {

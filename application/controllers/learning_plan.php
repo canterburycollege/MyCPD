@@ -28,23 +28,21 @@ class Learning_plan extends CI_Controller {
      */
     protected $employee_id;
 
-    
     public function __construct() {
         parent::__construct();
-        $this->load->helper(array('form','url_helper'));
+        $this->load->helper(array('form', 'url_helper'));
         $this->load->library('form_validation');
         $this->load->model(array(
-            'activity_model','auth_user_model','employee_model'));
+            'activity_model', 'auth_user_model', 'employee_model'));
 
         $this->form_validation
-            ->set_error_delimiters('<div class="form_error">', '</div>');
+                ->set_error_delimiters('<div class="form_error">', '</div>');
 
-        $this->employee_id = 
+        $this->employee_id =
                 $this->auth_user_model->get_auth_user()->employee_id;
     }
-    
-    
-    public function create_activity($employee_id){
+
+    public function create_activity($employee_id) {
         $data['employee_id'] = $employee_id;
         $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
@@ -71,30 +69,32 @@ class Learning_plan extends CI_Controller {
             $employee = $this->employee_model->get_employee($this->employee_id);
             $data['employee'] = $employee;
 
-            //$this->load->view('templates/header', $data);
-            if (empty($data['learning_plan'])) {
-                show_404();
-                $err['msg'] = 'No Learning Plan found!';
-                $this->load->view('templates/error', $err);
+            $rows_inserted = $this->activity_model->create($form_data);
+            if($rows_inserted < 1){
+                /**
+                 * @todo Redirect to error page
+                 */
+                echo 'error message';
             } else {
-                $this->load->view('learning_plan/view', $data);
+                redirect('/learning_plan/view', 'refresh');
             }
+            //$this->load->view('templates/header', $data);
         }
     }
-    
+
     /**
      * Loads page to create a new target for a given learning plan
      * 
      * @param integer $learning_plan_id 
      */
-    public function create_target($learning_plan_id){
+    public function create_target($learning_plan_id) {
         /**
          * @todo code to create new target
          */
         $this->load->view('learning_plan/create_target');
     }
-    
-    public function delete_activity($id){
+
+    public function delete_activity($id) {
         $this->activity_model->delete($id);
         $this->view();
     }
