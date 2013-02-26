@@ -105,12 +105,14 @@ class Learning_plan extends CI_Controller {
 
     public function update_activity($id) {
 
+        $data['id'] = $id;
         $data['activity'] = $this->activity_model->get_activity($id);
         $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
         $data['targets'] = $this->activity_model->get_target_options($this->employee_id);
 
         $this->form_validation
+                ->set_rules('planned_date', 'required')
                 ->set_rules('title', 'Title', 'required')
                 ->set_rules('learning_outcomes', 'Learning outcomes', 'required')
         ;
@@ -120,10 +122,16 @@ class Learning_plan extends CI_Controller {
         } else {
             $form_data = array(
                 'employee_id' => $this->employee_id,
+                'planned_date' => $this->input->post('planned_date'),
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
+                'cpd_type_id' => $this->input->post('cpd_type_id'),
                 'target_id' => $this->input->post('target_id'),
-                'priority_type_id' => $this->input->post('priority_type_id')
+                'priority_type_id' => $this->input->post('priority_type_id'),
+                'completed_date' => $this->input->post('completed_date'),
+                'evaluation_url' => $this->input->post('evaluation_url'),
+                'hours_of_cpd' => $this->input->post('hours_cpd'),
+                'rating' => $this->input->post('rating')
             );
 
             $rows_updated = $this->activity_model->update($id, $form_data);
