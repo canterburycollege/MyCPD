@@ -139,7 +139,7 @@ class Learning_plan extends CI_Controller {
                 /**
                  * @todo Redirect to error page
                  */
-                echo 'error message';
+                $this->load->view('learning_plan/update_activity', $data);
             } else {
                 redirect('/learning_plan/view', 'refresh');
             }
