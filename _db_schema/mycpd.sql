@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2013 at 09:14 PM
+-- Generation Time: Feb 26, 2013 at 09:24 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -30,7 +30,6 @@ DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
-  `learning_plan_id` int(11) DEFAULT NULL,
   `title` varchar(250) NOT NULL,
   `provider` varchar(250) NOT NULL,
   `learning_outcomes` varchar(250) NOT NULL,
@@ -43,12 +42,19 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `hours_of_cpd` decimal(7,2) NOT NULL,
   `rating` int(1) DEFAULT NULL COMMENT 'rating out of 5',
   PRIMARY KEY (`id`),
-  KEY `learning_plan_id` (`learning_plan_id`),
   KEY `learning_plan_target_id` (`target_id`),
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
+(1, 1, 'A fictitious event', '', 'The description of a fictitious event...', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
+(2, 1, 'Another event', '', 'some more learning outcomes', '2013-02-26', 1, 1, 7, '2013-02-19', ' ', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -64,6 +70,15 @@ CREATE TABLE IF NOT EXISTS `cpd_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+--
+-- Dumping data for table `cpd_type`
+--
+
+INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
+(1, 'Supported Experiment', 1),
+(2, 'Coaching', 2),
+(3, 'Peer Observation', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +93,13 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
+(1, 'Treesa Green', 99, 'test');
 
 -- --------------------------------------------------------
 
@@ -104,6 +126,15 @@ CREATE TABLE IF NOT EXISTS `priority_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
+--
+-- Dumping data for table `priority_type`
+--
+
+INSERT INTO `priority_type` (`id`, `description`, `sort_order`) VALUES
+(7, 'High', 1),
+(8, 'Medium', 2),
+(9, 'Low', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +154,13 @@ CREATE TABLE IF NOT EXISTS `target` (
   KEY `targets_ibfk_1` (`employee_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `target`
+--
+
+INSERT INTO `target` (`id`, `title`, `description`, `status_id`, `employee_id`, `target_date`) VALUES
+(1, 'Target 1', 'This is the descriptionfor target 1', 7, 1, '28/02/2013');
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +174,14 @@ CREATE TABLE IF NOT EXISTS `target_status` (
   `sort_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `target_status`
+--
+
+INSERT INTO `target_status` (`id`, `title`, `sort_order`) VALUES
+(7, 'Current', 1),
+(8, 'Archived', 2);
 
 -- --------------------------------------------------------
 
@@ -153,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 ,`cpd_type_id` int(11)
 ,`cpd_type` varchar(50)
 ,`target_id` int(11)
+,`target` varchar(150)
 ,`priority_type_id` int(11)
 ,`priority_type` varchar(50)
 ,`completed_date` date
@@ -181,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 --
 DROP TABLE IF EXISTS `v_activity`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity` AS (select `activity`.`id` AS `id`,`activity`.`employee_id` AS `employee_id`,`activity`.`title` AS `title`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from ((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_activity` AS (select `activity`.`id` AS `id`,`activity`.`employee_id` AS `employee_id`,`activity`.`title` AS `title`,`activity`.`provider` AS `provider`,`activity`.`learning_outcomes` AS `learning_outcomes`,`activity`.`planned_date` AS `planned_date`,`activity`.`cpd_type_id` AS `cpd_type_id`,`cpd_type`.`description` AS `cpd_type`,`activity`.`target_id` AS `target_id`,`target`.`title` AS `target`,`activity`.`priority_type_id` AS `priority_type_id`,`priority_type`.`description` AS `priority_type`,`activity`.`completed_date` AS `completed_date`,`activity`.`evaluation_url` AS `evaluation_url`,`activity`.`hours_of_cpd` AS `hours_of_cpd`,`activity`.`rating` AS `rating` from (((`activity` left join `cpd_type` on((`activity`.`cpd_type_id` = `cpd_type`.`id`))) left join `priority_type` on((`activity`.`priority_type_id` = `priority_type`.`id`))) left join `target` on((`activity`.`target_id` = `target`.`id`))));
 
 -- --------------------------------------------------------
 
