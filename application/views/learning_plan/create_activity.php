@@ -15,8 +15,7 @@
         <h1>MyCPD</h1>
   
         <?= validation_errors(); ?>
-
-        <?= form_open('learning_plan/create_activity/') ?>
+        <?= form_open('learning_plan/create_activity/' . $employee_id) ?>
 
         <fieldset>
             <legend>Add new activity/event</legend>

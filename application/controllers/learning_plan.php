@@ -43,7 +43,7 @@ class Learning_plan extends CI_Controller {
     }
 
     public function create_activity($employee_id) {
-
+        $data['employee_id'] = $employee_id;
         $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
         $data['targets'] = $this->activity_model->get_target_options($employee_id);
