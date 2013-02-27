@@ -17,12 +17,13 @@
         <?= validation_errors(); ?>
         <?= form_open('learning_plan/update_activity/' . $id) ?>
 
-        <fieldset>
+        <fieldset>          
+            <legend>Update activity/event</legend>
+            
             <label for="planned_date">Planned date</label>
             <input type="text" name="planned_date" id="planned_date" 
                    value="<?= $activity->planned_date ?>" /><br />
             
-            <legend>Update activity/event</legend>
             <label for="title">Title of activity/event</label> 
             <textarea name="title"><?= $activity->title ?></textarea><br />
 
