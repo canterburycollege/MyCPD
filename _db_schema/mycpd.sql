@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2013 at 09:24 PM
+-- Generation Time: Feb 27, 2013 at 05:39 PM
 -- Server version: 5.5.24-log
--- PHP Version: 5.4.3
+-- PHP Version: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, 'A fictitious event', '', 'The description of a fictitious event...', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
+(1, 1, 'Assessing Learning', '', 'Gather a range of assessment techniques to implement in class', '2013-02-26', 1, 2, 7, '2013-02-26', ' ', '0.00', 0),
 (2, 1, 'Another event', '', 'some more learning outcomes', '2013-02-26', 1, 1, 7, '2013-02-19', ' ', '0.00', 0);
 
 -- --------------------------------------------------------
@@ -152,14 +152,16 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `target`
 --
 
 INSERT INTO `target` (`id`, `title`, `description`, `status_id`, `employee_id`, `target_date`) VALUES
-(1, 'Target 1', 'This is the descriptionfor target 1', 7, 1, '28/02/2013');
+(1, 'Target 1', 'This is the descriptionfor target 1', 7, 1, '28/02/2013'),
+(2, 'Timely assessment of students', 'This is the descriptionfor target 1', 7, 1, '28/02/2013'),
+(3, 'Target 3', 'This is the descriptionfor target 3', 8, 1, '28/02/2013');
 
 -- --------------------------------------------------------
 
