@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2013 at 09:24 PM
+-- Generation Time: Feb 28, 2013 at 10:19 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -46,15 +46,16 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `activity`
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, 'A fictitious event', '', 'The description of a fictitious event...', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
-(2, 1, 'Another event', '', 'some more learning outcomes', '2013-02-26', 1, 1, 7, '2013-02-19', ' ', '0.00', 0);
+(1, 1, '                Assessing learning            ', '', '                Gather a range of assesment techniques to implement in class            ', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
+(2, 1, 'Mentoring new colleagues                      ', '', 'Some more learning outcomes, this field is currently set to have a maximum of 600 characters available in  the database.', '2013-02-26', 1, 2, 7, '2013-02-19', ' ', '0.00', 0),
+(3, 1, 'Parents evening', '', 'some really important learning outcomes            ', '2013-03-01', 1, 4, 8, '0000-00-00', '', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `cpd_type` (
   `description` varchar(50) NOT NULL,
   `sort_order` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `cpd_type`
@@ -77,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `cpd_type` (
 INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
 (1, 'Supported Experiment', 1),
 (2, 'Coaching', 2),
-(3, 'Peer Observation', 3);
+(3, 'Peer Observation', 3),
+(4, 'Other CPD type', 99);
 
 -- --------------------------------------------------------
 
@@ -152,14 +154,17 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `target`
 --
 
 INSERT INTO `target` (`id`, `title`, `description`, `status_id`, `employee_id`, `target_date`) VALUES
-(1, 'Target 1', 'This is the descriptionfor target 1', 7, 1, '28/02/2013');
+(1, 'Timely assessment of students', 'This is the description for target 1', 7, 1, '28/02/2013'),
+(2, 'Update teaching & learning skills', 'A more detailed description of this target', 7, 1, NULL),
+(3, 'Update subject specialism', 'Some text to describe this target...', 7, 1, NULL),
+(4, 'Fulfil wider professional responsibilities', 'Make a positive contribution to the wider life and ethos of the College. communicate effectively with parents with regard to pupils’ achievements and well- being', 7, 1, NULL);
 
 -- --------------------------------------------------------
 
