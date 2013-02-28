@@ -19,6 +19,15 @@ td,th  {
     border-style: solid;
 }
 
+.layout {
+    width: 100%;
+    border-style: none;
+}
+
+.right {
+    text-align: right;
+}
+
 .form_error {
     width: 560px; 
     background-color: lightpink;

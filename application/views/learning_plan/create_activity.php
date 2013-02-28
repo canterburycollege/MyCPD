@@ -24,10 +24,10 @@
             <input type="text" name="planned_date" id="planned_date" /><br />
             
             <label for="title">Title of activity/event</label> 
-            <textarea name="title"></textarea><br />
+            <textarea name="title" cols="50" rows="3"></textarea><br />
 
             <label for="learning_outcomes">Intended learning outcomes</label>
-            <textarea name="learning_outcomes"></textarea><br />
+            <textarea name="learning_outcomes" cols="50" rows="6"></textarea><br />
             
             <label for="cpd_type_id">CPD type</label>
             <?= form_dropdown('cpd_type_id', $cpd_types) ?><br />

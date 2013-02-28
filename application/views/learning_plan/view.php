@@ -15,10 +15,21 @@
 
     </head>
     <body>
-        <h1>My Learning Plan</h1>
-        <h2>Employee: <?= $employee->display_name ?></h2>
+        <table class="layout">
+            <tr>
+                <td class="layout"><h1>My Learning Plan</h1></td>
+                <td class="layout right"><h2><?= $employee->display_name ?></h2></td>
+            </tr>
+        </table>
+        <hr/>
+        <table class="layout">
+            <tr>
+                <td class="layout">Hub | Targets | Report | Online Courses | 
+                    Contractual Qualifications</td>
+            </tr>
+        </table>
+        <hr/>
         <div id="div_activities">
-            <h3>Activities/Events</h3>
             <table id="table_detail">
                 <thead>
                     <tr>

@@ -24,10 +24,14 @@
             
             <legend>Update activity/event</legend>
             <label for="title">Title of activity/event</label> 
-            <textarea name="title"><?= $activity->title ?></textarea><br />
+            <textarea name="title" cols="50" rows="3">
+                <?= $activity->title ?>
+            </textarea><br />
 
             <label for="learning_outcomes">Intended learning outcomes</label>
-            <textarea name="learning_outcomes"><?= $activity->learning_outcomes ?></textarea><br />
+            <textarea name="learning_outcomes" cols="50 "rows="6">
+                <?= $activity->learning_outcomes ?>
+            </textarea><br />
             
             <label for="cpd_type_id">CPD type</label>
             <?= form_dropdown('cpd_type_id', $cpd_types, $activity->cpd_type_id) ?><br />
