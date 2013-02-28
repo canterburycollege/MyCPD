@@ -17,12 +17,13 @@
         <?= validation_errors(); ?>
         <?= form_open('learning_plan/update_activity/' . $id) ?>
 
-        <fieldset>
+        <fieldset>          
+            <legend>Update activity/event</legend>
+            
             <label for="planned_date">Planned date</label>
             <input type="text" name="planned_date" id="planned_date" 
                    value="<?= $activity->planned_date ?>" /><br />
             
-            <legend>Update activity/event</legend>
             <label for="title">Title of activity/event</label> 
             <textarea name="title" cols="50" rows="3">
                 <?= $activity->title ?>
@@ -32,7 +33,7 @@
             <textarea name="learning_outcomes" cols="50 "rows="6">
                 <?= $activity->learning_outcomes ?>
             </textarea><br />
-            
+                     
             <label for="cpd_type_id">CPD type</label>
             <?= form_dropdown('cpd_type_id', $cpd_types, $activity->cpd_type_id) ?><br />
 
