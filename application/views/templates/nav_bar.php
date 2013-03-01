@@ -5,8 +5,7 @@
             | <?= anchor('learning_plan/view', 'Learning Plan') ?> 
             | <?= anchor('target/view', 'Targets') ?>
             | <?= anchor('report/index', 'Reports')?> 
-            | Online Courses 
-            | Contractual Qualifications
+            | <?= anchor('mandatory_cpd/index', 'Mandatory & Contractual Training') ?>
         </td>
     </tr>
 </table>
