@@ -16,6 +16,9 @@
     </head>
     <body>
         <h1>MyCPD Hub</h1>
+        <hr/>
+        <?php $this->load->view('templates/nav_bar'); ?>
+        <hr/>
     <li><a href="<?= base_url('/learning_plan/view') ?>">Learning Plan</a></li>
     <li><a href="<?= base_url('/target/view') ?>">Targets</a></li>
     </body>
