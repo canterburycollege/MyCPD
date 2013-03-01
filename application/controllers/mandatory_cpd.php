@@ -21,7 +21,16 @@ class Mandatory_cpd extends CI_Controller {
     }
     
     public function index(){
-        $data = array();
+        $err_msg = $this->controller . '/index()';
+        
+        $employee =
+                $this->employee_model->get_employee($this->employee_id);
+        if (empty($employee)) {
+            show_error($err_msg . ': cannot find employee_id ('
+                    . $this->employee_id . ') in database');
+        }
+        
+        $data['employee'] = $employee;
         $this->load->view('learning_plan/mandatory_cpd', $data);
     }
 }

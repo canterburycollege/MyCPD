@@ -2,9 +2,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>MyCPD</title>
+        <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Mandatory & Contractual Training Page</h1>
+        <table class="layout">
+            <tr>
+                <td class="layout"><h1>Mandatory & Contractual Training Page</h1></td>
+                <td class="layout right"><h2><?= $employee->display_name ?></h2></td>
+            </tr>
+        </table>
         <hr/>
         <?php $this->load->view('templates/nav_bar'); ?>
         <hr/>
