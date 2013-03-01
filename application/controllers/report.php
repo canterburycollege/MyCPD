@@ -1,6 +1,6 @@
 <?php
 
-class Learning_plan extends CI_Controller {
+class Report extends CI_Controller {
 
     /**
      * Name of current controller, used in error messages
@@ -19,7 +19,8 @@ class Learning_plan extends CI_Controller {
     }
     
     public function index(){
-        $this->load->view('learning_plan/report');
+        $data = array();
+        $this->load->view('learning_plan/report', $data);
     }
 }
 ?>

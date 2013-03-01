@@ -6,6 +6,9 @@
     </head>
     <body>
         <h1>Report Page</h1>
+        <hr/>
+        <?php $this->load->view('templates/nav_bar'); ?>
+        <hr/>
         <p>Page for selecting, viewing and printing reports about MyCPD</p>
     </body>
 </html>
