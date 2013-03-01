@@ -22,12 +22,7 @@
             </tr>
         </table>
         <hr/>
-        <table class="layout">
-            <tr>
-                <td class="layout">Hub | Targets | Report | Online Courses | 
-                    Contractual Qualifications</td>
-            </tr>
-        </table>
+        <?php $this->load->view('templates/nav_bar'); ?>
         <hr/>
         <div id="div_activities">
             <table id="table_detail">
