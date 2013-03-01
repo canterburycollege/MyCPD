@@ -60,7 +60,7 @@
             <input type="text" name="hours_of_cpd" id="hours_of_cpd" 
                    value="<?= $activity->hours_of_cpd ?>" /><br />
             
-            <label for="rating">Rating (1..5)</label>
+            <label for="rating">Rating: </label>
             <!--<input type="text" name="rating" id="rating" 
                    value="<?php //$activity->rating ?>" /><br />-->
             <input type="radio" name="rating" id="rating" value="1" class="star"/>
@@ -68,6 +68,7 @@
             <input type="radio" name="rating" id="rating" value="3" class="star"/>
             <input type="radio" name="rating" id="rating" value="4" class="star"/>
             <input type="radio" name="rating" id="rating" value="5" class="star"/>
+            @todo: fix save to database for rating
             <br />
             <input type="submit" name="submit" value="Submit" /> 
             <input type="reset" name="reset" value="Reset" />
