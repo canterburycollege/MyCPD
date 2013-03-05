@@ -29,8 +29,6 @@ class Hub extends CI_Controller {
 
     public function view() {
         $err_msg = $this->controller . '/view()';
-        $data['news'] = $this->news_model->get_news();
-        $this->load->view('news/view', $data);
         $this->load->view('hub/view');
     }
 
