@@ -5,11 +5,16 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
         <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+        <!-- star rating -->
+        <script src='http://jquery-star-rating-plugin.googlecode.com/svn/trunk/jquery.rating.js' type="text/javascript" language="javascript"></script>
+        <link href='http://jquery-star-rating-plugin.googlecode.com/svn/trunk/jquery.rating.css' type="text/css" rel="stylesheet"/>
         <script>
             $(function() {
                 $( "#planned_date" ).datepicker({dateFormat: 'yy-mm-dd'});
                 $( "#completed_date" ).datepicker({dateFormat: 'yy-mm-dd'});
             });
+            
+            $("#rating").rating('select','1');
         </script>
     </head>
     <body>
@@ -55,9 +60,15 @@
             <input type="text" name="hours_of_cpd" id="hours_of_cpd" 
                    value="<?= $activity->hours_of_cpd ?>" /><br />
             
-            <label for="rating">Rating (1..5)</label>
-            <input type="text" name="rating" id="rating" 
-                   value="<?= $activity->rating ?>" /><br />
+            <label for="rating">Rating: </label>
+            <!--<input type="text" name="rating" id="rating" 
+                   value="<?php //$activity->rating ?>" /><br />-->
+            <input type="radio" name="rating" id="rating" value="1" class="star"/>
+            <input type="radio" name="rating" id="rating" value="2" class="star"/>
+            <input type="radio" name="rating" id="rating" value="3" class="star"/>
+            <input type="radio" name="rating" id="rating" value="4" class="star"/>
+            <input type="radio" name="rating" id="rating" value="5" class="star"/>
+            @todo: fix save to database for rating
             <br />
             <input type="submit" name="submit" value="Submit" /> 
             <input type="reset" name="reset" value="Reset" />
