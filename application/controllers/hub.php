@@ -18,20 +18,21 @@ class Hub extends CI_Controller {
         parent::__construct();
         $this->load->helper('url_helper');
         $this->load->model('hub_model');
+        $this->load->model('news_model');
     }
 
     public function index() {
         //$data['targets'] = $this->target_model->get_targets();
         //$data['title'] = 'Targets';
-
-        $this->load->view('hub/index', $data);
+        //$this->load->view('hub/index', $data);
     }
 
     public function view() {
         $err_msg = $this->controller . '/view()';
-
-        //$data['targets'] = $this->target_model->get_targets();
+        $data['news'] = $this->news_model->get_news();
+        $this->load->view('news/view', $data);
         $this->load->view('hub/view');
     }
 
 }
+

@@ -18,13 +18,14 @@ class Target extends CI_Controller {
         parent::__construct();
         $this->load->helper('url_helper');
         $this->load->model('target_model');
+        $this->load->model('news_model');
     }
 
     public function index() {
         $data['targets'] = $this->target_model->get_targets();
         $data['title'] = 'Targets';
 
-        $this->load->view('target/index', $data);
+        
     }
 
     public function view() {
@@ -32,6 +33,8 @@ class Target extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['targets'] = $this->target_model->get_targets();
+        $data['news'] = $this->news_model->get_news();
+        $this->load->view('news/view', $data);
         $this->load->view('target/view', $data);
     }
 

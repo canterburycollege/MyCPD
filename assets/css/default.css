@@ -69,3 +69,15 @@ form br {
     /* floats don't clear on all browsers, so use br */
     clear:left;
 }
+
+.news {
+    border:2px solid;
+    padding:4px;
+    font:100% verdana,arial,sans-serif;
+    background: #F5FFFA
+    
+}
+
+ .fieldset-auto-width {
+         display: inline-block;
+    }

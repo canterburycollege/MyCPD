@@ -34,6 +34,7 @@ function Editqry(id)
     </head>
     <body>
         <h1><img src="<?= base_url('/assets/pix/target.gif') ?>" alt="Target icon"> My Targets</h1>
+                
         <hr/>
         <?php $this->load->view('templates/nav_bar'); ?>
         <hr/>

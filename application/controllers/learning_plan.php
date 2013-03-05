@@ -34,7 +34,8 @@ class Learning_plan extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model(array(
             'activity_model', 'auth_user_model', 'employee_model'));
-
+        $this->load->model('news_model');
+        
         $this->form_validation
                 ->set_error_delimiters('<div class="form_error">', '</div>');
 
@@ -170,6 +171,8 @@ class Learning_plan extends CI_Controller {
         $data['activities'] = $activities;
 
         //$this->load->view('templates/header', $data);
+        $data['news'] = $this->news_model->get_news();
+        $this->load->view('news/view', $data);
         $this->load->view('learning_plan/view', $data);
         //$this->load->view('templates/footer');
     }
