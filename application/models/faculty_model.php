@@ -48,6 +48,22 @@ class Faculty_model extends CI_Model {
     }
     
     /**
+     * Query db for a list of faculties
+     * @return array of Faculty objects
+     */
+    public function get_faculties() {
+        
+        $rows = array();
+        $query = $this->db->get($this->tbl_faculty);
+        
+        foreach ($query->result() as $row){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
+    
+    /**
      * Edit faculty in db
      * 
      * @param integer $id Faculty row id

@@ -52,7 +52,16 @@ class Faculty extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('admin/faculty');
+        $faculties =
+                $this->faculty_model->get_faculties();
+        if (empty($faculties)) {
+            show_error($err_msg . ': cannot find any faculties in database');
+        }
+
+        $data['faculties'] = $faculties;
+
+        //$this->load->view('templates/header', $data);
+        $this->load->view('admin/faculty', $data);
     }
 
     public function update($id) {
