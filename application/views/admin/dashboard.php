@@ -10,8 +10,12 @@
             <li><?= anchor("admin/faculty/","Manage Faculties") ?><br/>
                 Create, edit, delete and manage Faculties.
             </li>
+            <br />
+            <li>
                 <?= anchor("admin/section/","Manage Sections") ?><br/>
                 Create, edit, delete and manage Sections.
+            </li>
+            <br />
             <li><?= anchor("admin/user/","Manage Users") ?><br/>
                 Create, edit, delete and manage Users.
             </li>
