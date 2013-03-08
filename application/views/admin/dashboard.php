@@ -7,6 +7,11 @@
     <body>
         <h1>Admin Dashboard Page</h1>
         <ul>
+            <li><?= anchor("admin/faculty/","Manage Faculties") ?><br/>
+                Create, edit, delete and manage Faculties.
+            </li>
+                <?= anchor("admin/section/","Manage Sections") ?><br/>
+                Create, edit, delete and manage Sections.
             <li><?= anchor("admin/user/","Manage Users") ?><br/>
                 Create, edit, delete and manage Users.
             </li>
