@@ -8,34 +8,59 @@
  * @author rh
  */
 class Faculty extends CI_Controller {
-    
+
     public function __construct() {
         parent::__construct();
-        $this->load->helper('url_helper');
+        $this->load->helper(array('form', 'url_helper'));
+        $this->load->library('form_validation');
+        $this->load->model(array('faculty_model'));
+
+        $this->form_validation
+                ->set_error_delimiters('<div class="form_error">', '</div>');
     }
-    
-    
-    public function create(){
-        /**
-         * @todo add code
-         */
+
+    public function create() {
+        $this->form_validation
+                ->set_rules('title', 'Title', 'required')
+                ->set_rules('manager', 'Faculty Head', 'required')
+        ;
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('admin/create_faculty');
+        } else {
+            $form_data = array(
+                'title' => $this->input->post('title'),
+                'manager' => $this->input->post('manager')
+            );
+
+            $rows_inserted = $this->faculty_model->create($form_data);
+            if ($rows_inserted < 1) {
+                /**
+                 * @todo Redirect to error page
+                 */
+                echo 'error message';
+            } else {
+                redirect('/admin/faculty/index', 'refresh');
+            }
+        }
     }
-    
-    public function delete($id){
+
+    public function delete($id) {
         /**
          * @todo code
          */
     }
-    
-    public function index(){
+
+    public function index() {
         $this->load->view('admin/faculty');
     }
-    
-    public function update($id){
+
+    public function update($id) {
         /**
          * @todo add code
          */
     }
+
 }
 
 ?>

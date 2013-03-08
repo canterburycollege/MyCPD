@@ -7,7 +7,7 @@
  *
  * @author rh
  */
-class Faculty extends CI_Controller {
+class Section extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -27,7 +27,7 @@ class Faculty extends CI_Controller {
     }
     
     public function index(){
-        $this->load->view('admin/faculty');
+        $this->load->view('admin/section');
     }
     
     public function update($id){
