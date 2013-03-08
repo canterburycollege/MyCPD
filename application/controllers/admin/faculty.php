@@ -65,9 +65,32 @@ class Faculty extends CI_Controller {
     }
 
     public function update($id) {
-        /**
-         * @todo add code
-         */
+        $data['id'] = $id;
+        $data['faculty'] = $this->faculty_model->get_faculty($id);
+
+        $this->form_validation
+                ->set_rules('title', 'Title', 'required')
+                ->set_rules('manager', 'Faculty Head', 'required')
+        ;
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('admin/update_faculty',$data);
+        } else {
+            $form_data = array(
+                'title' => $this->input->post('title'),
+                'manager' => $this->input->post('manager')
+            );
+
+            $rows_inserted = $this->faculty_model->update($id,$form_data);
+            if ($rows_inserted < 1) {
+                /**
+                 * @todo Redirect to error page
+                 */
+                echo 'error message';
+            } else {
+                redirect('/admin/faculty/index', 'refresh');
+            }
+        }
     }
 
 }

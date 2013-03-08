@@ -32,8 +32,8 @@
                         <tr>
                             <td><?= $row->title ?></td>
                             <td><?= $row->manager ?></td>
-                            <td><?= anchor('admin/faculty/edit' . $row->id, 'Edit') ?>
-                                |<?= anchor('admin/faculty/delete' . $row->id, 'Delete') ?>                    
+                            <td><?= anchor('admin/faculty/update/' . $row->id, 'Edit') ?>
+                                |<?= anchor('admin/faculty/delete/' . $row->id, 'Delete') ?>                    
                             </td>
                         </tr>
                     <?php endforeach; ?>
