@@ -1,1 +1,0 @@
-<p>Delete Learning Plan Detail Page</p>
