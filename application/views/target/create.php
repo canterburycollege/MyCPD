@@ -7,25 +7,27 @@
                 $( "#target_date" ).datepicker({dateFormat: 'dd/mm/yy'});
             });
         </script>
-
+        <div class="target">
 <h2>Create a target</h2>
 
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('target/create') ?>
-
+<fieldset class="fieldset-auto-width">
 <label for="title">Title</label> 
 <input type="input" name="title" /><br />
 
 <label for="description">Description</label>
-<textarea name="description"></textarea><br />
+<textarea name="description" row="50" cols="50"></textarea><br />
 
 <label for="target_status_id">Status</label>
 <?= form_dropdown('target_status', $target_status) ?><br />
 
             <label for="target_date">Target Date</label>
             <input type="text" name="target_date" id="target_date" /><br />
-
+            <br>
 <input type="submit" name="submit" value="Create target" /> 
-
+    </fieldset>  
 </form>
+
+  </div>

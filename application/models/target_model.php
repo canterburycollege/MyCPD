@@ -51,6 +51,28 @@ class Target_model extends CI_Model {
         return $this->db->insert($this->tbl_target, $data);
     }
 
+        public function update_target() {
+        $this->load->helper('url');
+
+        //$slug = url_title($this->input->post('title'), 'dash', TRUE);
+
+        $data = array(
+  
+            'title' => $this->input->post('title'),
+            'description' => $this->input->post('description'),
+            'status_id' => $this->input->post('target_status'),
+            'employee_id' => $this->employee_id = $this->auth_user_model->get_auth_user()->employee_id,
+            'target_date' => $this->input->post('target_date')
+        );
+        
+        $this->db->where('id', $_GET['id']);
+        return $this->db->update($this->tbl_target, $data); 
+
+        
+        
+        
+    }
+    
     /**
      * Query db for array of target status
      * 
@@ -70,6 +92,6 @@ class Target_model extends CI_Model {
     }
 
    public function delete_target($id) {
-       $this->db->delete('targets', array('id' => $id)); 
+       $this->db->delete('target', array('id' => $id)); 
    }
 }

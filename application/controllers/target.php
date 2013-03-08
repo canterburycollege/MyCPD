@@ -33,8 +33,6 @@ class Target extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['targets'] = $this->target_model->get_targets();
-        $data['news'] = $this->news_model->get_news();
-        $this->load->view('news/view', $data);
         $this->load->view('target/view', $data);
     }
 
@@ -50,7 +48,7 @@ class Target extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('target/create', $data);
         } else {
-            $this->target_model->set_target();
+            $this->target_model->set_target($_GET['id']);
             $this->load->view('target/success');
         }
     }
@@ -67,7 +65,22 @@ class Target extends CI_Controller {
         $this->load->library('form_validation');
         $data['targets'] = $this->target_model->get_targets($_GET['id']);
         $data['target_status'] = $this->target_model->get_status_options();
-        $this->load->view('target/edit', $data);
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        
+        
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('target/edit', $data);
+        } else {
+            $this->target_model->update_target();
+            $this->load->view('target/updatesuccess');
+        }
+        
+        
+
+        
+        
+        
     }
 
 }

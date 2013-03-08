@@ -3,16 +3,8 @@
 <head>
         <title>MyCPD Hub</title>
         <link href="<?= base_url('/assets/css/default.css') ?>" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-        <script type="text/javascript" src="<?= base_url('assets/js/DataTables/media/js/jquery.dataTables.js') ?>"></script>
-        <script>
-            $(document).ready(function(){
-                $('#table_1').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers"});
-            });
-        </script>
+
+
         
         
         
@@ -80,7 +72,7 @@ function toggle5(showHideDiv, switchImgTag) {
 <div id="jcontrols_button">
 				<div class="jcontrolsleft">		
 						        					<div class="navbar clearfix">
-            					<div class="breadcrumb"> <span class="accesshide">Page path</span><ul><li><a title="Home" href="http://vle.cant-col.ac.uk/">Home</a></li><li> <span class="accesshide " ><span class="arrow_text">/</span>&nbsp;</span><span class="arrow sep">&#x25B6;</span> <span tabindex="0">Login to the site</span></li></ul></div>
+            					<div class="breadcrumb"> <?php $this->load->view('templates/nav_bar'); ?></div>
             
         					</div>
         										</div>
@@ -91,16 +83,14 @@ function toggle5(showHideDiv, switchImgTag) {
 </div>	
 	
 <div id="contentwrapper">	
-	<!-- start OF moodle CONTENT -->
+	<!-- start OF MyCPD CONTENT -->
 				<div id="page-content">
-                                    
+                                    <div class="title">
                                             <h1>MyCPD Hub</h1>
-                                            
+                                            </div>
                                             <?php 
                                             $data['news'] = $this->news_model->get_news();
                                             $this->load->view('news/view', $data); ?>
-        <hr/>
-        <?php $this->load->view('templates/nav_bar'); ?>
         <hr/>
     <li><a href="<?= base_url('/learning_plan/view') ?>">Learning Plan</a></li>
     <li><a href="<?= base_url('/target/view') ?>">Targets</a></li>

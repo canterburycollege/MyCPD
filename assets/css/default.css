@@ -46,9 +46,7 @@ form {  /* set width in form, not fieldset (still takes up more room w/ fieldset
     font:100% verdana,arial,sans-serif;
     margin: 0;
     padding: 0;
-    min-width: 500px;
-    max-width: 1200px;
-    width: 1200px; 
+
 }
 
 form fieldset {
@@ -81,3 +79,34 @@ form br {
  .fieldset-auto-width {
          display: inline-block;
     }
+    
+    .target {
+        background:#c0deed;
+    }
+    
+    body {
+        background:#c0deed;
+        font:100% verdana,arial,sans-serif;
+    }
+    
+    label {
+        padding-bottom: 6px;
+        
+    }
+    
+    .profilelogin {
+        font-size: 1.4em;
+        font-weight: bold;
+        letter-spacing: none;
+        padding-right: 10px;
+    }
+    
+    .breadcrumb {
+      padding-top: 6px; 
+    }
+    
+    .title {
+        text-align: center;
+        padding-top: 6px;
+    }
+    

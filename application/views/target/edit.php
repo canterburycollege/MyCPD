@@ -2,12 +2,11 @@
 /**
  * @package target edit form
  * @todo Check this is your target to edit or your an admin.
- * @todo set current status.
+ * 
  */
 
 //for testing
-echo "Edit record ".$_GET['id']."<br>"; ?>
-
+echo "Edit record ".$_GET['id']."<br>";?>
 
 
 
@@ -23,7 +22,7 @@ echo "Edit record ".$_GET['id']."<br>"; ?>
 
 <h2>Edit a target</h2>
                 <?php foreach ($targets as $target_item): ?>
-              <?php echo "Status: ".$target_item['status']; ?>
+              
                      
                
 <?php endforeach; ?>
@@ -31,7 +30,7 @@ echo "Edit record ".$_GET['id']."<br>"; ?>
                     
                     <?php echo validation_errors(); ?>
 
-<?php echo form_open('target/create') ?>
+<?php echo form_open('target/edit?id='.$_GET['id']) ?>
 
 <label for="title">Title</label> 
 <input type="input" name="title" value="<?= $target_item['title'] ?>"/><br />
@@ -45,6 +44,6 @@ echo "Edit record ".$_GET['id']."<br>"; ?>
             <label for="target_date">Target Date</label>
             <input type="text" name="target_date" id="target_date" value="<?= $target_item['target_date'] ?>"/><br />
 
-<input type="submit" name="submit" value="Create target" /> 
+<input type="submit" name="submit" value="Update target" /> 
 
 </form>
