@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 10:19 PM
+-- Generation Time: Mar 08, 2013 at 04:10 PM
 -- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -46,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `activity`
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, '                Assessing learning            ', '', '                Gather a range of assesment techniques to implement in class            ', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
+(1, 1, '                                                                                                                                Assessing learning                                                                                                        ', '', '                                                                                                                                Gather a range of assesment techniques to implement in class                                                              ', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
 (2, 1, 'Mentoring new colleagues                      ', '', 'Some more learning outcomes, this field is currently set to have a maximum of 600 characters available in  the database.', '2013-02-26', 1, 2, 7, '2013-02-19', ' ', '0.00', 0),
 (3, 1, 'Parents evening', '', 'some really important learning outcomes            ', '2013-03-01', 1, 4, 8, '0000-00-00', '', '0.00', 0);
 
@@ -106,6 +106,43 @@ INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_gr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employee_section`
+--
+
+DROP TABLE IF EXISTS `employee_section`;
+CREATE TABLE IF NOT EXISTS `employee_section` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employee_id` (`employee_id`,`section_id`),
+  KEY `section_id` (`section_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faculty`
+--
+
+DROP TABLE IF EXISTS `faculty`;
+CREATE TABLE IF NOT EXISTS `faculty` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `manager` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`id`, `title`, `manager`) VALUES
+(0, 'Arts, Media & Publishing', 'Mark Howland');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `news`
 --
 
@@ -140,6 +177,22 @@ INSERT INTO `priority_type` (`id`, `description`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `section`
+--
+
+DROP TABLE IF EXISTS `section`;
+CREATE TABLE IF NOT EXISTS `section` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `manager` varchar(50) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `faculty_id` (`faculty_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `target`
 --
 
@@ -154,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `target` (
   PRIMARY KEY (`id`),
   KEY `targets_ibfk_2` (`status_id`),
   KEY `targets_ibfk_1` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `target`
@@ -164,7 +217,10 @@ INSERT INTO `target` (`id`, `title`, `description`, `status_id`, `employee_id`, 
 (1, 'Timely assessment of students', 'This is the description for target 1', 7, 1, '28/02/2013'),
 (2, 'Update teaching & learning skills', 'A more detailed description of this target', 7, 1, NULL),
 (3, 'Update subject specialism', 'Some text to describe this target...', 7, 1, NULL),
-(4, 'Fulfil wider professional responsibilities', 'Make a positive contribution to the wider life and ethos of the College. communicate effectively with parents with regard to pupils’ achievements and well- being', 7, 1, NULL);
+(4, 'Fulfil wider professional responsibilities', 'Make a positive contribution to the wider life and ethos of the College. communicate effectively with parents with regard to pupils’ achievements and well- being', 7, 1, NULL),
+(5, 'New Target', 'New target...', 7, 1, '22/03/2013'),
+(6, 'Fulfil wider professional responsibilities', 'Make a positive contribution to the wider life and ethos of the College. communicate effectively with parents with regard to pupilsâ€™ achievements and well- being', 7, 1, '04/03/2013'),
+(7, 'Fulfil wider professional responsibilities', 'Make a positive contribution to the wider life and ethos of the College. communicate effectively with parents with regard to pupilsÃ¢â‚¬â„¢ achievements and well- being', 7, 1, '04/03/2013');
 
 -- --------------------------------------------------------
 
@@ -256,6 +312,19 @@ ALTER TABLE `activity`
   ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_2` FOREIGN KEY (`target_id`) REFERENCES `target` (`id`),
   ADD CONSTRAINT `Learning_plan_detail_ibfk_3` FOREIGN KEY (`priority_type_id`) REFERENCES `priority_type` (`id`);
+
+--
+-- Constraints for table `employee_section`
+--
+ALTER TABLE `employee_section`
+  ADD CONSTRAINT `employee_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`),
+  ADD CONSTRAINT `employee_section_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
+
+--
+-- Constraints for table `section`
+--
+ALTER TABLE `section`
+  ADD CONSTRAINT `section_ibfk_1` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id`);
 
 --
 -- Constraints for table `target`
