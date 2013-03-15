@@ -46,9 +46,15 @@ class Faculty extends CI_Controller {
     }
 
     public function delete($id) {
-        /**
-         * @todo code
-         */
+        $rows_deleted = $this->faculty_model->delete($id);
+        if ($rows_deleted < 1) {
+            /**
+             * @todo Redirect to error page
+             */
+            echo '@todo - redirect to error page, when record not deleted';
+        } else {
+            redirect('/admin/faculty/index', 'refresh');
+        }
     }
 
     public function index() {
@@ -86,7 +92,7 @@ class Faculty extends CI_Controller {
                 /**
                  * @todo Redirect to error page
                  */
-                echo 'error message';
+                echo '@todo - redirect to error page, when record is not updated';
             } else {
                 redirect('/admin/faculty/index', 'refresh');
             }
