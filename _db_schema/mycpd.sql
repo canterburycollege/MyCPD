@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2013 at 04:10 PM
+-- Generation Time: Mar 15, 2013 at 04:08 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `activity`
 --
 
+DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -45,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `activity` (
   KEY `priority_type_id` (`priority_type_id`),
   KEY `employee_id` (`employee_id`),
   KEY `cpd_type_id` (`cpd_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `activity`
 --
 
 INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outcomes`, `planned_date`, `cpd_type_id`, `target_id`, `priority_type_id`, `completed_date`, `evaluation_url`, `hours_of_cpd`, `rating`) VALUES
-(1, 1, '                                                                                                                                Assessing learning                                                                                                        ', '', '                                                                                                                                Gather a range of assesment techniques to implement in class                                                              ', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
+(1, 1, '                                                                                                                                                                Assessing learning                                                                        ', '', '                                                                                                                                                      Gather a range of assesment techniques to implement in class                                        ', '2013-02-26', 1, 1, 7, '2013-02-26', ' ', '0.00', 0),
 (2, 1, 'Mentoring new colleagues                      ', '', 'Some more learning outcomes, this field is currently set to have a maximum of 600 characters available in  the database.', '2013-02-26', 1, 2, 7, '2013-02-19', ' ', '0.00', 0),
 (3, 1, 'Parents evening', '', 'some really important learning outcomes            ', '2013-03-01', 1, 4, 8, '0000-00-00', '', '0.00', 0);
 
@@ -62,6 +63,7 @@ INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outc
 -- Table structure for table `cpd_type`
 --
 
+DROP TABLE IF EXISTS `cpd_type`;
 CREATE TABLE IF NOT EXISTS `cpd_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -69,12 +71,23 @@ CREATE TABLE IF NOT EXISTS `cpd_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+--
+-- Dumping data for table `cpd_type`
+--
+
+INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
+(1, 'Supported Experiment', 1),
+(2, 'Coaching', 2),
+(3, 'Peer Observation', 3),
+(4, 'Other CPD type', 99);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(50) NOT NULL,
@@ -82,6 +95,13 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `mycpd_access_group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
+(1, 'Treesa Green', 99, 'test');
 
 -- --------------------------------------------------------
 
@@ -107,18 +127,21 @@ CREATE TABLE IF NOT EXISTS `employee_section` (
 
 DROP TABLE IF EXISTS `faculty`;
 CREATE TABLE IF NOT EXISTS `faculty` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `manager` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `faculty`
 --
 
 INSERT INTO `faculty` (`id`, `title`, `manager`) VALUES
-(0, 'Arts, Media & Publishing', 'Mark Howland');
+(1, 'Arts, Media & Publishing', 'Mark Howland'),
+(2, 'Engineering & Construction', 'faculty head1'),
+(3, 'Enterprise & Partnerships', 'Faculty Head2'),
+(5, 'Higher Education', 'Faculty Head3');
 
 -- --------------------------------------------------------
 
@@ -126,8 +149,9 @@ INSERT INTO `faculty` (`id`, `title`, `manager`) VALUES
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
-  `description` varchar(1024) DEFAULT NULL
+  `description` varchar(500) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -136,12 +160,22 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Table structure for table `priority_type`
 --
 
+DROP TABLE IF EXISTS `priority_type`;
 CREATE TABLE IF NOT EXISTS `priority_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
   `sort_order` int(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `priority_type`
+--
+
+INSERT INTO `priority_type` (`id`, `description`, `sort_order`) VALUES
+(7, 'High', 1),
+(8, 'Medium', 2),
+(9, 'Low', 3);
 
 -- --------------------------------------------------------
 
@@ -157,7 +191,15 @@ CREATE TABLE IF NOT EXISTS `section` (
   `faculty_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `faculty_id` (`faculty_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `section`
+--
+
+INSERT INTO `section` (`id`, `title`, `manager`, `faculty_id`) VALUES
+(2, 'Arts & Media', 'Section Manager1', 1),
+(4, 'Music', 'Section Manager2', 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +207,7 @@ CREATE TABLE IF NOT EXISTS `section` (
 -- Table structure for table `target`
 --
 
+DROP TABLE IF EXISTS `target`;
 CREATE TABLE IF NOT EXISTS `target` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) DEFAULT NULL,
@@ -196,6 +239,7 @@ INSERT INTO `target` (`id`, `title`, `description`, `status_id`, `employee_id`, 
 -- Table structure for table `target_status`
 --
 
+DROP TABLE IF EXISTS `target_status`;
 CREATE TABLE IF NOT EXISTS `target_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -203,11 +247,20 @@ CREATE TABLE IF NOT EXISTS `target_status` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
+--
+-- Dumping data for table `target_status`
+--
+
+INSERT INTO `target_status` (`id`, `title`, `sort_order`) VALUES
+(7, 'Current', 1),
+(8, 'Archived', 2);
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_activity`
 --
+DROP VIEW IF EXISTS `v_activity`;
 CREATE TABLE IF NOT EXISTS `v_activity` (
 `id` int(11)
 ,`employee_id` int(11)
@@ -231,6 +284,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 --
 -- Stand-in structure for view `v_targets_with_status`
 --
+DROP VIEW IF EXISTS `v_targets_with_status`;
 CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 `id` int(11)
 ,`title` varchar(150)
@@ -274,8 +328,8 @@ ALTER TABLE `activity`
 -- Constraints for table `employee_section`
 --
 ALTER TABLE `employee_section`
-  ADD CONSTRAINT `employee_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`),
-  ADD CONSTRAINT `employee_section_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
+  ADD CONSTRAINT `employee_section_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`),
+  ADD CONSTRAINT `employee_section_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`);
 
 --
 -- Constraints for table `section`
