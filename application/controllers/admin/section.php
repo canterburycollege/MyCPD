@@ -77,10 +77,12 @@ class Section extends CI_Controller {
     public function update($id){
         $data['id'] = $id;
         $data['section'] = $this->section_model->get_section($id);
+        $data['faculties'] = $this->faculty_model->get_faculty_options();
 
         $this->form_validation
                 ->set_rules('title', 'Title', 'required')
                 ->set_rules('manager', 'Section Manager', 'required')
+                ->set_rules('faculty_id', 'Faculty Head', 'required')
         ;
 
         if ($this->form_validation->run() === FALSE) {
@@ -88,7 +90,8 @@ class Section extends CI_Controller {
         } else {
             $form_data = array(
                 'title' => $this->input->post('title'),
-                'manager' => $this->input->post('manager')
+                'manager' => $this->input->post('manager'),
+                'faculty_id' => $this->input->post('faculty_id')
             );
 
             $rows_inserted = $this->section_model->update($id,$form_data);
