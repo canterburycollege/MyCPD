@@ -59,6 +59,32 @@ class Section_model extends CI_Model {
     }
     
     /**
+     * Query db for a list of faculties
+     * @return array of Faculty objects
+     */
+    public function get_sections() {
+        
+        $rows = array();
+        //$query = $this->db->get($this->tbl_section);
+        $query = $this->db->query('
+            SELECT  s.id,
+                    s.title,
+                    s.manager,
+                    s.faculty_id,
+                    f.title AS faculty_title,
+                    f.manager AS faculty_manager
+            FROM    section s
+                    JOIN faculty f
+                        ON s.faculty_id = f.id');
+        
+        foreach ($query->result() as $row){
+            $rows[] = $row;
+        }
+        
+        return $rows;
+    }
+    
+    /**
      * Remove employee from section
      * 
      * @param integer $employee_id 

@@ -48,6 +48,24 @@ class Faculty_model extends CI_Model {
     }
     
     /**
+     * Query db for array of faculties to use as select options
+     * 
+     * @return array Array of faculty objects
+     */
+    public function get_faculty_options() {
+
+        $data = array();
+        $this->db
+                ->order_by('title', 'asc');
+        $query = $this->db->get($this->tbl_faculty);
+        foreach ($query->result() as $row) {
+            $rows[$row->id] = $row->title;
+        }
+
+        return $rows;
+    }
+    
+    /**
      * Query db for a list of faculties
      * @return array of Faculty objects
      */
