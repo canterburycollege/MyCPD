@@ -21,6 +21,27 @@ class Auth_user_model extends CI_Model {
     }
     
     /**
+     * Force moodle login & get user details
+     * 
+     * Attributes include id, username(ldap), firstname, lastname, email
+     * 
+     * @return object Moodle user details (return NULL, if not logged in)
+     */
+    private function get_moodle_user(){
+        
+        /**
+         * @todo make sure moodle path is correct!
+         */
+        // call moodle config file
+        require_once '../../config.php';
+        // force login
+        require_login();
+        $user_object = $DB->get_record('user', array('id'=>$USER->id));
+        
+        return $user_object;
+    }
+    
+    /**
      * For testing/demo
      * 
      * Insert dummy row with id=1, if doesn't already exist
