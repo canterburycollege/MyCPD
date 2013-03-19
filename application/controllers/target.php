@@ -48,7 +48,7 @@ class Target extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('target/create', $data);
         } else {
-            $this->target_model->set_target($_GET['id']);
+            $this->target_model->set_target();
             $this->load->view('target/success');
         }
     }

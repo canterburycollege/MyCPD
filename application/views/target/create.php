@@ -14,8 +14,11 @@
 
 <?php echo form_open('target/create') ?>
 <fieldset class="fieldset-auto-width">
-<label for="title">Title</label> 
+<label for="title">Target tag</label> 
 <input type="input" name="title" /><br />
+
+<label for="title_ext">Target title</label> 
+<input type="input" name="title_ext" /><br />
 
 <label for="description">Description</label>
 <textarea name="description" row="50" cols="50"></textarea><br />

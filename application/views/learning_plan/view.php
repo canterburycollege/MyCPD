@@ -114,9 +114,10 @@ function toggle5(showHideDiv, switchImgTag) {
             <table id="table_detail">
                 <thead>
                     <tr>
+                        <th>Target this CPD addresses</th>
                         <th>Title of CPD activity/event</th>
                         <th>Intended Learning Outcomes</th>
-                        <th>target this CPD addresses</th>
+                        <th>Intended impact on student outcomes – what will be different for them?</th>
                         <th>Priority level</th>
                         <th>Target Date</th>
                         <th>Completed?</th>
@@ -127,9 +128,10 @@ function toggle5(showHideDiv, switchImgTag) {
                 <tbody>
                     <?php foreach ($activities as $row): ?>
                         <tr>
+                            <td><?= $row->target ?></td>
                             <td><?= $row->title ?></td>
                             <td><?= $row->learning_outcomes ?></td>
-                            <td><?= $row->target ?></td>
+                            <td><?= $row->impact ?></td>
                             <td><?= $row->priority_type ?></td>
                             <td><?= $row->planned_date ?></td>
                             <td><?= $row->completed_date ?></td>

@@ -158,7 +158,8 @@ function toggle5(showHideDiv, switchImgTag) {
         <table id="table_detail">
             <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Target tag</th>
+                    <th>Target title</th>
                     <th>Description</th>
                     <th>Status</th>
                     <th>Due</th>
@@ -169,6 +170,7 @@ function toggle5(showHideDiv, switchImgTag) {
                 <?php foreach ($targets as $target_item): ?>
                     <tr>
                         <td><?= $target_item['title'] ?></td>
+                        <td><?= $target_item['title_ext'] ?></td>
                         <td><?= $target_item['description'] ?></td>
                         <td><?= $target_item['status'] ?></td>
                         <td><?= $target_item['target_date'] ?></td>
@@ -181,7 +183,7 @@ function toggle5(showHideDiv, switchImgTag) {
             </tbody>
         </table>
     </form>
-        <a href="<?= base_url('/target/create') ?> target="popup" onClick="wopen('<?= base_url('/target/create') ?>', 'popup', 533, 170); return false;">Add a target</a> | 
+        <a href="<?= base_url('/target/create') ?> target="popup" onClick="wopen('<?= base_url('/target/create') ?>', 'popup', 533, 186); return false;">Add a target</a> | 
         <a href="<?= base_url('/hub/view') ?>">Back to hub</a>
      <!-- END OF CONTENT --> 
 </div>      
