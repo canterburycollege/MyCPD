@@ -146,7 +146,8 @@ function toggle5(showHideDiv, switchImgTag) {
 				<div id="page-content">
 
     <body>
-        <h1><img src="<?= base_url('/assets/pix/target.gif') ?>" alt="Target icon"> My Targets</h1>
+        <table class="layout">
+        <div id="sectiontitle"><h1><img src="<?= base_url('/assets/pix/target.gif') ?>" alt="Target icon"> My Targets</h1></div>
                    <?php 
                                             $data['news'] = $this->news_model->get_news();
                                             $this->load->view('news/view', $data); ?>       

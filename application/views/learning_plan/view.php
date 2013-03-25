@@ -101,11 +101,7 @@ function toggle5(showHideDiv, switchImgTag) {
 
     <body>
         <table class="layout">
-            <tr>
-                <td class="layout"><h1>My Learning Plan</h1></td>
-                <td class="layout right"></td>
-            </tr>
-        </table>
+<div id="sectiontitle"><h1>My Learning Plan</h1></div>
           <?php 
                                             $data['news'] = $this->news_model->get_news();
                                             $this->load->view('news/view', $data); ?>

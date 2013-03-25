@@ -15,7 +15,7 @@ class Mandatory_cpd extends CI_Controller {
         $this->load->helper(array('form', 'url_helper'));
         $this->load->model(array(
             'auth_user_model', 'employee_model'));
-
+        $this->load->model('news_model');
         $this->employee_id =
                 $this->auth_user_model->get_auth_user()->employee_id;
     }
