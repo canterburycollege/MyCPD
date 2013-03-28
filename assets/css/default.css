@@ -114,3 +114,13 @@ form br {
         padding-left: 20px;
         padding-top: 20px;
     }
+    
+    .jcontrolsleft2 {
+       font-weight: 500;
+font-size: 13px;
+float: left;
+border-width: 0px;
+overflow: hidden;
+height: 35px;
+width: 100%; 
+    }
