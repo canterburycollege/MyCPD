@@ -45,20 +45,7 @@ document.body.className += ' jsenabled';
 	<a href="http://vle.cant-col.ac.uk/"><img src='http://vle.cant-col.ac.uk/theme/aardvark/pix/CC-logo.png' alt='logo' id='logo' /></a>	
 				
 		</div>
-        <script text/javascript>
-function toggle5(showHideDiv, switchImgTag) {
-        var ele = document.getElementById(showHideDiv);
-        var imageEle = document.getElementById(switchImgTag);
-        if(ele.style.display == "block") {
-                ele.style.display = "none";
-		imageEle.innerHTML = '<img src="http://vle.cant-col.ac.uk/theme/image.php?theme=aardvark&amp;image=profile%2Fdown&amp;rev=609&amp;component=theme">';
-        }
-        else {
-                ele.style.display = "block";
-                imageEle.innerHTML = '<img src="http://vle.cant-col.ac.uk/theme/image.php?theme=aardvark&amp;image=profile%2Fup&amp;rev=609&amp;component=theme">';
-        }
-}
-</script>
+
 <div class="profilepic" id="profilepic">
 	<a href="http://vle.cant-col.ac.uk/user/view.php?id=0&amp;course=1"><img src="http://vle.cant-col.ac.uk/user/pix.php?file=/0/f1.jpg" width="80px" height="80px" title="Guest" alt="Guest" /></a></div>
 
