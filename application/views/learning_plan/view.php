@@ -99,8 +99,13 @@ document.body.className += ' jsenabled';
                     <tr>
                         <th>Target this CPD addresses</th>
                         <th>Title of CPD activity/event</th>
+<<<<<<< HEAD
                         <th>Intended Learning Outcomes for teacher</th>
                         <th>Intended impact on learner outcomes</th>
+=======
+                        <th>Intended Learning Outcomes</th>
+                        <th>Intended impact on student outcomes – what will be different for them?</th>
+>>>>>>> CPDimpact-patch
                         <th>Priority level</th>
                         <th>Target Date</th>
                         <th>Completed?</th>
@@ -114,7 +119,11 @@ document.body.className += ' jsenabled';
                             <td><?= $row->target ?></td>
                             <td><?= $row->title ?></td>
                             <td><?= $row->learning_outcomes ?></td>
+<<<<<<< HEAD
                             <td>x</td>
+=======
+                            <td><?= $row->impact ?></td>
+>>>>>>> CPDimpact-patch
                             <td><?= $row->priority_type ?></td>
                             <td><?= $row->planned_date ?></td>
                             <td><?= $row->completed_date ?></td>

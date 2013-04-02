@@ -19,7 +19,16 @@ echo "Edit record ".$_GET['id']."<br>";?>
                 $( "#target_date" ).datepicker({dateFormat: 'dd/mm/yy'});
             });
         </script>
-
+<script type="text/javascript" src="<?= base_url('/assets/js/tiny_mce/jquery.tinymce.js')?>"></script>
+ <script type="text/javascript" src="<?= base_url('/assets/js/tiny_mce/tiny_mce.js')?>"></script>
+<script type="text/javascript">
+tinyMCE.init({
+        theme : "advanced",
+        mode : "textareas",
+        plugins : "fullpage",
+        theme_advanced_buttons3_add : "fullpage"
+});
+</script>
 <h2>Edit a target</h2>
                 <?php foreach ($targets as $target_item): ?>
               
@@ -32,8 +41,11 @@ echo "Edit record ".$_GET['id']."<br>";?>
 
 <?php echo form_open('target/edit?id='.$_GET['id']) ?>
 
-<label for="title">Title</label> 
+<label for="title">Target tag</label> 
 <input type="input" name="title" value="<?= $target_item['title'] ?>"/><br />
+
+<label for="title_ext">Target title</label> 
+<input type="input" name="title_ext" value="<?= $target_item['title_ext'] ?>"/><br />
 
 <label for="description">Description</label>
 <textarea name="description"><?= $target_item['description'] ?></textarea><br />

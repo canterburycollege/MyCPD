@@ -42,6 +42,7 @@ class Target_model extends CI_Model {
 
         $data = array(
             'title' => $this->input->post('title'),
+            'title_ext' => $this->input->post('title_ext'),
             'description' => $this->input->post('description'),
             'status_id' => $this->input->post('target_status'),
             'employee_id' => $this->employee_id = $this->auth_user_model->get_auth_user()->employee_id,
@@ -59,6 +60,7 @@ class Target_model extends CI_Model {
         $data = array(
   
             'title' => $this->input->post('title'),
+            'title_ext' => $this->input->post('title_ext'),
             'description' => $this->input->post('description'),
             'status_id' => $this->input->post('target_status'),
             'employee_id' => $this->employee_id = $this->auth_user_model->get_auth_user()->employee_id,

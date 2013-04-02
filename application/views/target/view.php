@@ -146,8 +146,14 @@ document.body.className += ' jsenabled';
         <table id="table_detail">
             <thead>
                 <tr>
+<<<<<<< HEAD
                     <th>Area for development</th>
                     <th>What training is to take place</th>
+=======
+                    <th>Target tag</th>
+                    <th>Target title</th>
+                    <th>Description</th>
+>>>>>>> CPDimpact-patch
                     <th>Status</th>
                     <th>Date Due</th>
                     <th>Actions</th>
@@ -156,7 +162,12 @@ document.body.className += ' jsenabled';
             <tbody>
                 <?php foreach ($targets as $target_item): ?>
                     <tr>
+<<<<<<< HEAD
                         <td><a href="http://webdev-04.cant-col.ac.uk/MyCPD/index.php/learning_plan/view?id=<?= $target_item['title'] ?>"><?= $target_item['title'] ?></a></td>
+=======
+                        <td><?= $target_item['title'] ?></td>
+                        <td><?= $target_item['title_ext'] ?></td>
+>>>>>>> CPDimpact-patch
                         <td><?= $target_item['description'] ?></td>
                         <td><?= $target_item['status'] ?></td>
                         <td><?= $target_item['target_date'] ?></td>
@@ -169,7 +180,7 @@ document.body.className += ' jsenabled';
             </tbody>
         </table>
     </form>
-        <a href="<?= base_url('/target/create') ?> target="popup" onClick="wopen('<?= base_url('/target/create') ?>', 'popup', 533, 170); return false;">Add a target</a> | 
+        <a href="<?= base_url('/target/create') ?> target="popup" onClick="wopen('<?= base_url('/target/create') ?>', 'popup', 533, 186); return false;">Add a target</a> | 
         <a href="<?= base_url('/hub/view') ?>">Back to hub</a>
      <!-- END OF CONTENT --> 
 </div>      
