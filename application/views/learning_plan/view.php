@@ -30,7 +30,7 @@
                     "bJQueryUI": true,
                     "sPaginationType": "full_numbers"});
                //auto fill fiter from get for linking. 
-               filter.fnFilter( '1 Teaching and Learning' ); 
+               filter.fnFilter( '<?php echo $_GET['id'] ;?>' ); 
             });
             
             

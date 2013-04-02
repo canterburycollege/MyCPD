@@ -156,7 +156,7 @@ document.body.className += ' jsenabled';
             <tbody>
                 <?php foreach ($targets as $target_item): ?>
                     <tr>
-                        <td><?= $target_item['title'] ?></td>
+                        <td><a href="http://webdev-04.cant-col.ac.uk/MyCPD/index.php/learning_plan/view?id=<?= $target_item['title'] ?>"><?= $target_item['title'] ?></a></td>
                         <td><?= $target_item['description'] ?></td>
                         <td><?= $target_item['status'] ?></td>
                         <td><?= $target_item['target_date'] ?></td>
