@@ -79,7 +79,7 @@ document.body.className += ' jsenabled';
                                             $data['news'] = $this->news_model->get_news();
                                             $this->load->view('news/view', $data); ?>
         <hr/>
-    <li><a href="<?= base_url('/learning_plan/view') ?>">Learning Plan</a></li>
+    <li><a href="<?= base_url('/learning_plan/view?id') ?>">Learning Plan</a></li>
     <li><a href="<?= base_url('/target/view') ?>">Targets</a></li>
 
    				 </div>

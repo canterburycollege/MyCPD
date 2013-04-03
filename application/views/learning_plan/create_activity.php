@@ -9,6 +9,7 @@
             $(function() {
                 $( "#planned_date" ).datepicker({dateFormat: 'yy-mm-dd'});
             });
+            
         </script>
     </head>
     <body>
@@ -28,6 +29,12 @@
 
             <label for="learning_outcomes">Intended learning outcomes</label>
             <textarea name="learning_outcomes" cols="50" rows="6"></textarea><br />
+            
+            <label for="intended_impact">Intended Impact</label>
+            <textarea name="intended_impact" cols="50" rows="6"></textarea><br />
+            
+            <label for="impact">Impact</label>
+            <textarea name="impact" cols="50" rows="6"></textarea><br />
             
             <label for="cpd_type_id">CPD type</label>
             <?= form_dropdown('cpd_type_id', $cpd_types) ?><br />

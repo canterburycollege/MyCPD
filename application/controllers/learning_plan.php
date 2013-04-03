@@ -61,6 +61,8 @@ class Learning_plan extends CI_Controller {
                 'employee_id' => $employee_id,
                 'planned_date' => $this->input->post('planned_date'),
                 'title' => $this->input->post('title'),
+                'intended_impact' => $this->input->post('intended_impact'),
+                'impact' => $this->input->post('impact'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
                 'cpd_type_id' => $this->input->post('cpd_type_id'),
                 'target_id' => $this->input->post('target_id'),
@@ -74,7 +76,7 @@ class Learning_plan extends CI_Controller {
                  */
                 echo 'error message';
             } else {
-                redirect('/learning_plan/view', 'refresh');
+                redirect('/learning_plan/view?id', 'refresh');
             }
             //$this->load->view('templates/header', $data);
         }
@@ -100,7 +102,7 @@ class Learning_plan extends CI_Controller {
              */
             echo 'Error message';
         } else {
-            redirect('/learning_plan/view', 'refresh');
+            redirect('/learning_plan/view?id', 'refresh');
         }
     }
 
@@ -126,6 +128,8 @@ class Learning_plan extends CI_Controller {
                 'planned_date' => $this->input->post('planned_date'),
                 'title' => $this->input->post('title'),
                 'learning_outcomes' => $this->input->post('learning_outcomes'),
+                'intended_impact' => $this->input->post('intended_impact'),
+                'impact' => $this->input->post('impact'),
                 'cpd_type_id' => $this->input->post('cpd_type_id'),
                 'target_id' => $this->input->post('target_id'),
                 'priority_type_id' => $this->input->post('priority_type_id'),
@@ -142,7 +146,7 @@ class Learning_plan extends CI_Controller {
                  */
                 $this->load->view('learning_plan/update_activity', $data);
             } else {
-                redirect('/learning_plan/view', 'refresh');
+                redirect('/learning_plan/view?id', 'refresh');
             }
             //$this->load->view('templates/header', $data);
         }
