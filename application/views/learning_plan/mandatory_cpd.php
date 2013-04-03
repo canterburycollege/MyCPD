@@ -109,6 +109,15 @@ document.body.className += ' jsenabled';
         <h2>Contractual Qualifications:</h2>
         <p>Note: These are manually added (by HR?) and have a status of not 
             enrolled, enrolled or completed</p>
+        
+        Reporting health & safety incidents 4132</br>
+        Meeting the threat from fire 4130</br>
+    Dealing with hazardous substances 4128</br>
+    Avoiding violence 4126</br>
+    Stress busting! 4124</br>
+    Lifting & carrying safely 4122</br>
+    Working safely with computers 4120</br>
+    Getting to grips with health & safety 4118</br>
         <ul>
             <li>Literacy Level 2</li>
             <li>Numeracy Level 2</li>
