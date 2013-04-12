@@ -21,7 +21,7 @@ class Target_model extends CI_Model {
         $this->load->database();
                 $this->load->model('auth_user_model');
         $this->load->model('employee_model');
-        $this->employee_id = $this->auth_user_model->get_auth_user()->employee_id;
+        $this->employee_id = $this->auth_user_model->get_auth_user()->id;
     }
 
     public function get_targets($id = FALSE) {

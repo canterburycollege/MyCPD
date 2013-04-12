@@ -7,7 +7,9 @@ class Mandatory_cpd extends CI_Controller {
      * @var string
      */
     private $controller = 'controller/mandatory_cpd';
-    
+    private $epmloyee_id;
+
+
     protected $employee_id;
 
     public function __construct() {
@@ -17,7 +19,7 @@ class Mandatory_cpd extends CI_Controller {
             'auth_user_model', 'employee_model'));
         $this->load->model('news_model');
         $this->employee_id =
-                $this->auth_user_model->get_auth_user()->employee_id;
+                $this->auth_user_model->get_auth_user()->id;
     }
     
     public function index(){
