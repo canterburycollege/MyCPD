@@ -17,6 +17,10 @@ class Auth_user_model extends CI_Model {
         $ldap_username = $logged_in_user->username;
         
         $data = $this->get_employee($ldap_username);
+        if (empty($data)) {
+            show_error('cannot find user ('
+                    . $ldap_username . ') in database');
+        }
         
         ##$data = new stdClass();
         ##$data->id = 1; // set for testing
