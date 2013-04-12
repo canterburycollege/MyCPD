@@ -40,7 +40,7 @@ class Learning_plan extends CI_Controller {
                 ->set_error_delimiters('<div class="form_error">', '</div>');
 
         $this->employee_id =
-                $this->auth_user_model->get_auth_user()->employee_id;
+                $this->auth_user_model->get_auth_user()->id;
     }
 
     public function create_activity($employee_id) {
