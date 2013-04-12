@@ -3,8 +3,7 @@
 class Auth_user_model extends CI_Model {
 
     public function __construct() {
-        $this->load->database();
-        $this->test_auth_user();
+        $this->load->database();;
     }
 
     /**
