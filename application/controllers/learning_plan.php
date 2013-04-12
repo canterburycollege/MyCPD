@@ -167,9 +167,6 @@ class Learning_plan extends CI_Controller {
 
         $activities =
                 $this->activity_model->get_employee_activities($this->employee_id);
-        if (empty($activities)) {
-            show_error($err_msg . ': cannot find any activities in database');
-        }
 
         $data['employee'] = $employee;
         $data['activities'] = $activities;
