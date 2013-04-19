@@ -36,7 +36,7 @@ td,th  {
 form label { 
     display: block;  /* block float the labels to left column, set a width */
     float: left; 
-    width: 150px; 
+    width: 250px; 
     padding: 0; 
     margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
     text-align: right; 
@@ -72,7 +72,6 @@ form br {
     border:2px solid;
     padding:4px;
     font:100% verdana,arial,sans-serif;
-<<<<<<< HEAD
     background: #F5FFFA;
     margin-left: 10px;
     margin-right: 10px;
@@ -126,7 +125,7 @@ overflow: hidden;
 height: 35px;
 width: 100%; 
     }
-=======
+
     background: #F5FFFA
 
 }
@@ -174,4 +173,12 @@ tr.odd {
 tr.even { 
     background-color: #FDFDF0; 
 }
->>>>>>> CPDimpact-patch
+
+
+#archive {
+    padding-left: 20px;
+}
+
+#key {
+    padding-left: 20px;
+}

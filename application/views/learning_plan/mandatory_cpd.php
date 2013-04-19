@@ -94,11 +94,45 @@ document.body.className += ' jsenabled';
                                             $this->load->view('news/view', $data); ?>       
         <hr/>
             <tr>
+                
                 <td class="layout"></td>
                 
             </tr>
         </table>
-
+        <div id="key">
+            <table>
+                <tr>
+            <td id ="key">Pass <img src="<?= base_url('/assets/pix/lights/greenlight.png'); ?>"></td>
+            <td id ="key">Attempt < 80% <img src="<?= base_url('/assets/pix/lights/yellowlight.png'); ?>"></td>
+            <td id ="key">No attempted <img src="<?= base_url('/assets/pix/lights/redlight.png'); ?>">     </td>   
+                </tr>
+                </table>   
+                </div>
+        <!-- Start -->
+                <table id="table_detail">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                   <th>Score</th>
+                   <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($score as $score_item): ?>
+                    <tr>
+                        
+                        <td><a href="linktocourse"><?= $score_item['title'] ?></a></td>
+                        <td><?= $score_item['value'] ?></td>
+                        <td align="center"><img src="<?= base_url('/assets/pix/lights/greenlight.png'); ?>"></td>
+                       
+                        
+                    </tr>
+<?php endforeach; ?>
+            </tbody>
+        </table>
+        <!-- End -->
+        
+        
         <h2>Mandatory Online Training & Assessments Traffic lights:</h2>
         <p>Note: These are automatically updated from Moodle SCORM courses.</p>
         <ul>

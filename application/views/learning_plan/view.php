@@ -94,6 +94,7 @@ document.body.className += ' jsenabled';
                                             $this->load->view('news/view', $data); ?>
         <hr/>
         <div id="div_activities">
+            <div id="archive"><?php echo date("Y")." <a href=archive.html> (archive)</a>"; ?></div>
             <table id="table_detail">
                 <thead>
                     <tr>
@@ -103,7 +104,7 @@ document.body.className += ' jsenabled';
                         <th>Intended impact on learner outcomes</th>
                         <th>Intended impact on student outcomes – what will be different for them?</th>
                         <th>Priority level</th>
-                        <th>Target Date</th>
+                        <th>Date Due</th>
                         <th>Completed?</th>
                         <th>Evaluation</th>
                         <th>Actions</th>

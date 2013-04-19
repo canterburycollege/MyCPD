@@ -67,5 +67,21 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 
+$db['moodle']['hostname'] = HOSTNAME2;
+$db['moodle']['username'] = USERNAME2;
+$db['moodle']['password'] = PASSWORD2;
+$db['moodle']['database'] = 'moodledev1';
+$db['moodle']['dbdriver'] = 'mysql';
+$db['moodle']['dbprefix'] = '';
+$db['moodle']['pconnect'] = TRUE;
+$db['moodle']['db_debug'] = TRUE;
+$db['moodle']['cache_on'] = FALSE;
+$db['moodle']['cachedir'] = '';
+$db['moodle']['char_set'] = 'utf8';
+$db['moodle']['dbcollat'] = 'utf8_general_ci';
+$db['moodle']['swap_pre'] = '';
+$db['moodle']['autoinit'] = TRUE;
+$db['moodle']['stricton'] = FALSE;
+
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -26,6 +26,7 @@ tinyMCE.init({
         theme : "advanced",
         mode : "textareas",
         plugins : "fullpage",
+        theme_advanced_toolbar_location : "top",
         theme_advanced_buttons3_add : "fullpage"
 });
 </script>
@@ -41,19 +42,19 @@ tinyMCE.init({
 
 <?php echo form_open('target/edit?id='.$_GET['id']) ?>
 
-<label for="title">Target tag</label> 
+<label for="title">Area for Development</label> 
 <input type="input" name="title" value="<?= $target_item['title'] ?>"/><br />
 
 <label for="title_ext">Target title</label> 
 <input type="input" name="title_ext" value="<?= $target_item['title_ext'] ?>"/><br />
 
-<label for="description">Description</label>
-<textarea name="description"><?= $target_item['description'] ?></textarea><br />
+<label for="description">Description of action</label>
+<textarea name="description" cols="100" rows="20"><?= $target_item['description'] ?></textarea><br />
 
 <label for="target_status_id">Status</label>
 <?= form_dropdown('target_status', $target_status)?><br />
 
-            <label for="target_date">Target Date</label>
+            <label for="target_date">Due Date</label>
             <input type="text" name="target_date" id="target_date" value="<?= $target_item['target_date'] ?>"/><br />
 
 <input type="submit" name="submit" value="Update target" /> 

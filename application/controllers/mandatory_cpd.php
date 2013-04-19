@@ -14,7 +14,7 @@ class Mandatory_cpd extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('form', 'url_helper'));
         $this->load->model(array(
-            'auth_user_model', 'employee_model'));
+            'auth_user_model', 'employee_model', 'mandatory_cpd_model'));
         $this->load->model('news_model');
         $this->employee_id =
                 $this->auth_user_model->get_auth_user()->employee_id;
@@ -31,8 +31,34 @@ class Mandatory_cpd extends CI_Controller {
         }
         
         $data['employee'] = $employee;
+        
+        $data['score'] = $this->mandatory_cpd_model->get_score();
+        
+        
         $this->load->view('learning_plan/mandatory_cpd', $data);
     }
+    
+    public function lights($value) {
+        switch ($value)
+        {
+            case 0:
+                $light="redlight.png";
+                echo $light;
+                break;
+            case 1:
+                $light="yellowlight.png";
+                echo $light;
+                break;
+            case 2:
+                $light="greenlight.png";
+                echo $light;
+                break;
+        }
+    }
+    
+    
 }
     
+
+
 ?>
