@@ -49,7 +49,7 @@ document.body.className += ' jsenabled';
 <div class="profilepic" id="profilepic">
 	<a href="http://vle.cant-col.ac.uk/user/view.php?id=0&amp;course=1"><img src="http://vle.cant-col.ac.uk/user/pix.php?file=/0/f1.jpg" width="80px" height="80px" title="Guest" alt="Guest" /></a></div>
 
-<div class="profilelogin" id="profilelogin"><form id="login" method="post" action="http://vle.cant-col.ac.uk/login/index.php?authldap_skipntlmsso=1"><ul></ul></form></div></div>		
+<div class="profilelogin" id="profilelogin"><?= $employee->display_name ?><form id="login" method="post" action="http://vle.cant-col.ac.uk/login/index.php?authldap_skipntlmsso=1"><ul></ul></form></div></div>		
 <div id="menuwrap">
 <div id="homeicon">
 <a href="http://vle.cant-col.ac.uk"><img src="http://vle.cant-col.ac.uk/theme/image.php?theme=aardvark&amp;image=menu%2Fhome_icon&amp;rev=609&amp;component=theme"></a>

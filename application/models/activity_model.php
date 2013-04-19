@@ -89,7 +89,7 @@ class Activity_model extends CI_Model {
      */
     public function get_target_options($employee_id) {
 
-        $data = array();
+        $rows = array();
         $this->db->where('employee_id', $employee_id);
         $query = $this->db->get($this->tbl_target);
         foreach ($query->result() as $row) {

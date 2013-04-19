@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2013 at 09:17 AM
--- Server version: 5.1.66-community-log
--- PHP Version: 5.3.10
+-- Generation Time: Apr 12, 2013 at 03:07 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `activity`
 --
 
+DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
@@ -66,6 +67,7 @@ INSERT INTO `activity` (`id`, `employee_id`, `title`, `provider`, `learning_outc
 -- Table structure for table `cpd_type`
 --
 
+DROP TABLE IF EXISTS `cpd_type`;
 CREATE TABLE IF NOT EXISTS `cpd_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -89,20 +91,24 @@ INSERT INTO `cpd_type` (`id`, `description`, `sort_order`) VALUES
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ldap_username` varchar(50) NOT NULL,
   `display_name` varchar(50) NOT NULL,
   `moodle_user_id` int(11) NOT NULL,
   `mycpd_access_group` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ldap_username` (`ldap_username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
-(1, 'Treesa Green', 99, 'test');
+INSERT INTO `employee` (`id`, `ldap_username`, `display_name`, `moodle_user_id`, `mycpd_access_group`) VALUES
+(1, '', 'Treesa Green', 99, 'test'),
+(2, 'rhardy', 'Russell Hardy', 0, 'admin');
 
 -- --------------------------------------------------------
 
@@ -110,6 +116,7 @@ INSERT INTO `employee` (`id`, `display_name`, `moodle_user_id`, `mycpd_access_gr
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `description` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -127,6 +134,7 @@ INSERT INTO `news` (`description`) VALUES
 -- Table structure for table `priority_type`
 --
 
+DROP TABLE IF EXISTS `priority_type`;
 CREATE TABLE IF NOT EXISTS `priority_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) NOT NULL,
@@ -149,6 +157,7 @@ INSERT INTO `priority_type` (`id`, `description`, `sort_order`) VALUES
 -- Table structure for table `target`
 --
 
+DROP TABLE IF EXISTS `target`;
 CREATE TABLE IF NOT EXISTS `target` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) DEFAULT NULL,
@@ -177,6 +186,7 @@ INSERT INTO `target` (`id`, `title`, `title_ext`, `description`, `status_id`, `e
 -- Table structure for table `target_status`
 --
 
+DROP TABLE IF EXISTS `target_status`;
 CREATE TABLE IF NOT EXISTS `target_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -197,6 +207,7 @@ INSERT INTO `target_status` (`id`, `title`, `sort_order`) VALUES
 --
 -- Stand-in structure for view `v_activity`
 --
+DROP VIEW IF EXISTS `v_activity`;
 CREATE TABLE IF NOT EXISTS `v_activity` (
 `id` int(11)
 ,`employee_id` int(11)
@@ -221,6 +232,7 @@ CREATE TABLE IF NOT EXISTS `v_activity` (
 --
 -- Stand-in structure for view `v_targets_with_status`
 --
+DROP VIEW IF EXISTS `v_targets_with_status`;
 CREATE TABLE IF NOT EXISTS `v_targets_with_status` (
 `id` int(11)
 ,`title` varchar(150)

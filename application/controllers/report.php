@@ -7,7 +7,9 @@ class Report extends CI_Controller {
      * @var string
      */
     private $controller = 'controller/report';
-    
+    private $employee_id;
+
+
     public function __construct() {
         parent::__construct();
         $this->load->helper(array('form', 'url_helper'));
@@ -16,7 +18,7 @@ class Report extends CI_Controller {
         $this->load->model('news_model');
         
         $this->employee_id =
-                $this->auth_user_model->get_auth_user()->employee_id;
+                $this->auth_user_model->get_auth_user()->id;
     }
     
     public function index(){

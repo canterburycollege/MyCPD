@@ -33,17 +33,17 @@ class Learning_plan extends CI_Controller {
         $this->load->helper(array('form', 'url_helper'));
         $this->load->library('form_validation');
         $this->load->model(array(
-            'activity_model', 'auth_user_model', 'employee_model'));
-        $this->load->model('news_model');
+            'activity_model', 'auth_user_model', 'employee_model','news_model'));
         
         $this->form_validation
                 ->set_error_delimiters('<div class="form_error">', '</div>');
 
         $this->employee_id =
-                $this->auth_user_model->get_auth_user()->employee_id;
+                $this->auth_user_model->get_auth_user()->id;
     }
 
-    public function create_activity($employee_id) {
+    public function create_activity() {
+        $employee_id = $this->employee_id;
         $data['employee_id'] = $employee_id;
         $data['cpd_types'] = $this->activity_model->get_cpd_type_options();
         $data['priorities'] = $this->activity_model->get_priority_options();
@@ -161,15 +161,12 @@ class Learning_plan extends CI_Controller {
         $employee =
                 $this->employee_model->get_employee($this->employee_id);
         if (empty($employee)) {
-            show_error($err_msg . ': cannot find employee_id ('
+            show_error('cannot find employee_id ('
                     . $this->employee_id . ') in database');
         }
 
         $activities =
                 $this->activity_model->get_employee_activities($this->employee_id);
-        if (empty($activities)) {
-            show_error($err_msg . ': cannot find any activities in database');
-        }
 
         $data['employee'] = $employee;
         $data['activities'] = $activities;
@@ -182,4 +179,4 @@ class Learning_plan extends CI_Controller {
 }
 
 /* End of file learning_plan.php */
-    /* Location: ./controllers/learning_plan.php */
+/* Location: ./controllers/learning_plan.php */
